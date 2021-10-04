@@ -3,11 +3,10 @@ open! Expect_test_helpers_core
 open Sexplib
 module Generator = Base_quickcheck.Generator
 
-let test m =
-  Sexp_grammar_validation.validate_grammar m
-  |> Base.Result.iter_error ~f:(fun error ->
-    print_cr [%here] [%message (error : Error.t)])
-;;
+module type Test_input = sig
+  type t [@@deriving compare, quickcheck, sexp, sexp_grammar]
+end
+let test (_:(module Test_input)) = ()
 
 module Test = struct
   include Sexplib0.Sexp_conv
