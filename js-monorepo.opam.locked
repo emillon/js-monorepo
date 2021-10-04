@@ -2,7 +2,6 @@ opam-version: "2.0"
 synopsis: "opam-monorepo generated lockfile"
 maintainer: "opam-monorepo"
 depends: [
-  "async_kernel" {= "v0.14.0"}
   "async_rpc_kernel" {= "v0.14.0"}
   "async_unix" {= "v0.14.0"}
   "base" {= "v0.14.1"}
@@ -77,10 +76,6 @@ depends: [
 ]
 depexts: ["linux-headers"] {os-distribution = "alpine"}
 pin-depends: [
-  [
-    "async_kernel.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/async_kernel-v0.14.0.tar.gz"
-  ]
   [
     "async_rpc_kernel.v0.14.0"
     "https://ocaml.janestreet.com/ocaml-core/v0.14/files/async_rpc_kernel-v0.14.0.tar.gz"
@@ -520,11 +515,6 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/async_kernel-v0.14.0.tar.gz"
-    "async_kernel"
-    ["md5=685575f6b6152e10a6d43859735c00cf"]
-  ]
-  [
     "https://ocaml.janestreet.com/ocaml-core/v0.14/files/async_rpc_kernel-v0.14.0.tar.gz"
     "async_rpc_kernel"
     ["md5=f435ab9bfb29aa43be1e0aa6b295252b"]
@@ -680,5 +670,5 @@ x-opam-monorepo-duniverse-dirs: [
     ["md5=c0a0481de7df3df028bdec76d9993892"]
   ]
 ]
-x-opam-monorepo-root-packages: ["async"]
+x-opam-monorepo-root-packages: ["async" "async_kernel"]
 x-opam-monorepo-version: "0.2"
