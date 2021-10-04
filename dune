@@ -1,0 +1,5 @@
+(rule
+ (alias default)
+ (deps
+  (alias_rec install))
+ (action (progn)))
