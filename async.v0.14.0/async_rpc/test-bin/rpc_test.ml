@@ -2,208 +2,6 @@ open Core
 open Poly
 open Async
 open Rpc
-module Limiter = Limiter_async.Token_bucket
-
-let run_at_limit ~dispatch msgs_per_sec () =
-  let limiter =
-    let burst_size = Float.to_int (msgs_per_sec /. 1_000.) in
-    Limiter.create_exn
-      ~burst_size
-      ~sustained_rate_per_sec:msgs_per_sec
-      ~continue_on_error:false
-      ~initial_burst_size:burst_size
-      ()
-  in
-  let event_precision = Scheduler.event_precision () in
-  let rec send_messages () =
-    let ran = ref false in
-    Limiter.enqueue_exn
-      limiter
-      ~allow_immediate_run:true
-      1000
-      (fun () ->
-         for _ = 2 to 1000 do
-           dispatch ()
-         done;
-         ran := true)
-      ();
-    if !ran
-    then send_messages ()
-    else (
-      let rec wait_for_previous_send () =
-        if !ran
-        then Deferred.unit
-        else Clock.after event_precision >>= wait_for_previous_send
-      in
-      wait_for_previous_send () >>= send_messages)
-  in
-  send_messages ()
-;;
-
-module Pipe_simple_test = struct
-  module String_pipe = struct
-    module Query = struct
-      type t' =
-        { msg_size : Byte_units.Stable.V1.t
-        ; msgs_per_sec : int
-        }
-      [@@deriving bin_io, sexp]
-
-      type t = t' option [@@deriving bin_io, sexp]
-
-      let start t =
-        let bytes =
-          match t with
-          | None -> 0
-          | Some t -> Byte_units.bytes_int_exn t.msg_size
-        in
-        let reader, writer = Pipe.create () in
-        let total_msgs = ref 0 in
-        let start = Time.now () in
-        Pipe.set_size_budget reader 1000;
-        let string = String.init bytes ~f:(fun _ -> 'A') in
-        let stop = Pipe.closed writer in
-        Clock.every ~stop (Time.Span.of_sec 1.) (fun () ->
-          Log.Global.printf "Queue size: %d" (Pipe.length reader));
-        Clock.every ~stop (Time.Span.of_sec 1.) (fun () ->
-          Log.Global.printf
-            "Messages per sec: %f"
-            (Float.of_int !total_msgs
-             /. Time.Span.to_sec (Time.diff (Time.now ()) start)));
-        let prev = ref (Time.now ()) in
-        let () =
-          match t with
-          | None ->
-            let rec loop () =
-              Pipe.pushback writer
-              >>> fun () ->
-              Pipe.write_without_pushback writer string;
-              loop ()
-            in
-            loop ()
-          | Some t ->
-            Clock.every' ~stop (Time.Span.of_sec 1.) (fun () ->
-              let msgs =
-                let new_time = Time.now () in
-                let diff = Time.Span.to_sec (Time.diff new_time !prev) in
-                Log.Global.printf "The diff is %f\n" diff;
-                prev := new_time;
-                Int.of_float (diff *. Int.to_float t.msgs_per_sec)
-              in
-              if not (Pipe.is_closed writer)
-              then
-                for i = 1 to msgs do
-                  let _ = i in
-                  incr total_msgs;
-                  Pipe.write_without_pushback writer string
-                done;
-              Pipe.downstream_flushed writer
-              >>| function
-              | `Reader_closed | `Ok -> ())
-        in
-        reader
-      ;;
-
-      let create msg_size msgs_per_sec = { msg_size; msgs_per_sec }
-    end
-
-    let rpc =
-      Pipe_rpc.create
-        ~client_pushes_back:()
-        ~name:"test-pipe-rpc"
-        ~version:1
-        ~bin_query:Query.bin_t
-        ~bin_response:String.bin_t
-        ~bin_error:Nothing.bin_t
-        ()
-    ;;
-  end
-
-  module Memory_consumption = struct
-    let init () =
-      let major_cycles = ref 0 in
-      ignore (Gc.Alarm.create (fun () -> incr major_cycles));
-      Clock.every (Time.Span.of_sec 5.) (fun () ->
-        Log.Global.printf "%d major cycles" !major_cycles)
-    ;;
-  end
-
-  module Client = struct
-    let _is_the_right_string msg_size string =
-      String.length string = msg_size && String.for_all string ~f:(( = ) 'A')
-    ;;
-
-    let main bytes msgs_per_sec host port ~rpc_impl () =
-      Memory_consumption.init ();
-      let query = Option.map msgs_per_sec ~f:(String_pipe.Query.create bytes) in
-      Rpc_impl.make_client rpc_impl host port
-      >>| Result.ok_exn
-      >>= fun connection ->
-      Pipe_rpc.dispatch String_pipe.rpc connection query
-      >>| Or_error.ok_exn
-      >>= function
-      | Error t -> Nothing.unreachable_code t
-      | Ok (pipe, _) ->
-        let msgs = ref 0 in
-        let start = Time.now () in
-        let _msg_size = Byte_units.bytes_int_exn bytes in
-        Clock.every (Time.Span.of_sec 1.) (fun () ->
-          let now = Time.now () in
-          let secs = Time.Span.to_sec (Time.diff now start) in
-          Log.Global.printf "%f msgs per sec" (Float.of_int !msgs /. secs));
-        Pipe.iter_without_pushback pipe ~f:(fun _string -> incr msgs)
-    ;;
-
-    let command =
-      Command.async_spec
-        ~summary:"test client"
-        Command.Spec.(
-          empty
-          +> flag "msg-size" (required Byte_units.arg_type) ~doc:""
-          +> flag "msgs-per-sec" (optional int) ~doc:""
-          +> flag "hostname" (required string) ~doc:""
-          +> flag "port" (required int) ~doc:""
-          ++ Rpc_impl.spec ())
-        main
-    ;;
-  end
-
-  module Server = struct
-    let implementation =
-      Pipe_rpc.implement String_pipe.rpc (fun () query ->
-        return (Ok (String_pipe.Query.start query)))
-    ;;
-
-    let main port ~rpc_impl () =
-      Memory_consumption.init ();
-      let implementations =
-        Implementations.create_exn
-          ~implementations:[ implementation ]
-          ~on_unknown_rpc:`Raise
-      in
-      Rpc_impl.make_server
-        ~initial_connection_state:(fun _ -> ())
-        ~implementations
-        ~port
-        rpc_impl
-      >>= fun (_ : Rpc_impl.Server.t) -> Deferred.never ()
-    ;;
-
-    let command =
-      Command.async_spec
-        ~summary:"test server"
-        Command.Spec.(empty +> flag "port" (required int) ~doc:"" ++ Rpc_impl.spec ())
-        main
-    ;;
-  end
-
-  let command =
-    Command.group
-      ~summary:
-        "Simple client and server to quickly check manually that pipe-rpc is working ok "
-      [ "server", Server.command; "client", Client.command ]
-  ;;
-end
 
 module Heartbeat_pipe_test = struct
   let main () =
@@ -254,12 +52,6 @@ module Heartbeat_pipe_test = struct
     >>| Result.ok_exn
   ;;
 
-  let command =
-    Command.async_spec
-      ~summary:"test that heartbeat handlers are installed correctly"
-      Command.Spec.empty
-      main
-  ;;
 end
 
 module Pipe_closing_test = struct
@@ -329,9 +121,6 @@ module Pipe_closing_test = struct
     >>| Result.ok_exn
   ;;
 
-  let command =
-    Command.async_spec ~summary:"test behavior of closing pipes" Command.Spec.empty main
-  ;;
 end
 
 module Pipe_iter_test = struct
@@ -380,7 +169,7 @@ module Pipe_iter_test = struct
            Pipe_rpc.dispatch_iter rpc conn query ~f
            >>| function
            | Error e -> Error.raise e
-           | Ok (Error nothing) -> Nothing.unreachable_code nothing
+           | Ok (Error _) -> .
            | Ok (Ok id) -> id
          in
          let next_expected : [ `Update of int | `Closed_remotely ] ref =
@@ -427,9 +216,6 @@ module Pipe_iter_test = struct
     >>| Result.ok_exn
   ;;
 
-  let command =
-    Command.async_spec ~summary:"test behavior of dispatch_iter" Command.Spec.empty main
-  ;;
 end
 
 module Pipe_direct_test = struct
@@ -514,209 +300,6 @@ module Pipe_direct_test = struct
          | Error _ -> ()
          | Closed_locally | Closed_remotely -> assert false)
     >>| Result.ok_exn
-  ;;
-
-  let command =
-    Command.async_spec
-      ~summary:"test behavior of implement_direct"
-      Command.Spec.empty
-      main
-  ;;
-end
-
-module Pipe_rpc_performance_measurements = struct
-  module Protocol = struct
-    type query = float [@@deriving bin_io]
-    type response = unit [@@deriving bin_io]
-
-    let rpc =
-      Pipe_rpc.create
-        ~client_pushes_back:()
-        ~name:"test-rpc-performance"
-        ~version:1
-        ~bin_query
-        ~bin_response
-        ~bin_error:Nothing.bin_t
-        ()
-    ;;
-  end
-
-  module Client = struct
-    let main msgs_per_sec host port ~rpc_impl () =
-      Rpc_impl.make_client rpc_impl host port
-      >>| Result.ok_exn
-      >>= fun connection ->
-      Pipe_rpc.dispatch Protocol.rpc connection msgs_per_sec
-      >>| Or_error.ok_exn
-      >>= function
-      | Error t -> Nothing.unreachable_code t
-      | Ok (pipe, _) ->
-        let cnt = ref 0 in
-        let total_cnt = ref 0 in
-        let ratio_acc = ref 0. in
-        let percentage_acc = ref 0. in
-        let sample_to_collect_and_exit = ref (-5) in
-        don't_wait_for
-          (Pipe.iter_without_pushback (Cpu_usage.samples ()) ~f:(fun percent ->
-             let percentage = Percent.to_percentage percent in
-             incr sample_to_collect_and_exit;
-             if percentage > 100.
-             then (
-               Print.printf "CPU pegged (%f). This test is not good.\n" percentage;
-               Shutdown.shutdown 1);
-             if !sample_to_collect_and_exit = 10
-             then (
-               Print.printf
-                 "%f (cpu: %f)\n"
-                 (!ratio_acc /. 10.)
-                 (!percentage_acc /. 10.);
-               Shutdown.shutdown 0)
-             else if !sample_to_collect_and_exit >= 0
-             then
-               if !cnt > 0
-               then (
-                 let ratio = percentage *. 1_000_000. /. Int.to_float !cnt in
-                 ratio_acc := !ratio_acc +. ratio;
-                 percentage_acc := !percentage_acc +. percentage);
-             cnt := 0));
-        Pipe.iter' pipe ~f:(fun queue ->
-          let len = Queue.length queue in
-          cnt := !cnt + len;
-          total_cnt := !total_cnt + len;
-          Deferred.unit)
-    ;;
-  end
-
-  module Server = struct
-    let start_test ~msgs_per_sec =
-      let reader, writer = Pipe.create () in
-      don't_wait_for
-        (run_at_limit ~dispatch:(Pipe.write_without_pushback writer) msgs_per_sec ());
-      reader
-    ;;
-
-    let implementation =
-      Pipe_rpc.implement Protocol.rpc (fun () msgs_per_sec ->
-        return (Ok (start_test ~msgs_per_sec)))
-    ;;
-  end
-end
-
-module Rpc_performance_measurements = struct
-  type msg = unit [@@deriving bin_io]
-
-  let one_way = One_way.create ~name:"one-way-rpc" ~version:1 ~bin_msg
-
-  type query = unit [@@deriving bin_io]
-  type response = unit [@@deriving bin_io]
-
-  let rpc = Rpc.create ~name:"regular-rpc" ~version:1 ~bin_query ~bin_response
-
-  let run_client ~dispatch msgs_per_sec host port ~rpc_impl () =
-    Rpc_impl.make_client rpc_impl host port
-    >>| Result.ok_exn
-    >>= fun connection -> run_at_limit ~dispatch:(dispatch connection) msgs_per_sec ()
-  ;;
-
-  let one_way_client msgs_per_sec host port ~rpc_impl () =
-    run_client
-      ~dispatch:(One_way.dispatch_exn one_way)
-      msgs_per_sec
-      host
-      port
-      ~rpc_impl
-      ()
-  ;;
-
-  let rpc_client msgs_per_sec host port ~rpc_impl () =
-    let dispatch connection () = don't_wait_for (Rpc.dispatch_exn rpc connection ()) in
-    run_client ~dispatch msgs_per_sec host port ~rpc_impl ()
-  ;;
-
-  module Server = struct
-    let cnt = ref 0
-    let one_way_implementation = One_way.implement one_way (fun () () -> incr cnt)
-    let rpc_implementation = Rpc.implement' rpc (fun () () -> incr cnt)
-
-    let main port ~rpc_impl () =
-      let implementations =
-        Implementations.create_exn
-          ~implementations:
-            [ one_way_implementation
-            ; rpc_implementation
-            ; Pipe_rpc_performance_measurements.Server.implementation
-            ]
-          ~on_unknown_rpc:`Raise
-      in
-      Rpc_impl.make_server
-        ~initial_connection_state:(fun _ -> ())
-        ~implementations
-        ~port
-        rpc_impl
-      >>= fun _server ->
-      let ratio_acc = ref 0. in
-      let percentage_acc = ref 0. in
-      let sample = ref 0 in
-      don't_wait_for
-        (Pipe.iter_without_pushback (Cpu_usage.samples ()) ~f:(fun percent ->
-           if 0 = !cnt
-           then ()
-           else (
-             let percentage = Percent.to_percentage percent in
-             Print.printf
-               "%d %d %f (cpu: %f)\n"
-               !cnt
-               !sample
-               (!ratio_acc /. Float.of_int !sample)
-               (!percentage_acc /. Float.of_int !sample);
-             if percentage > 100.
-             then Print.printf "CPU pegged (%f). This test may not good.\n" percentage
-             else (
-               if !sample >= 0
-               then
-                 if !cnt > 0
-                 then (
-                   let ratio = percentage *. 1_000_000. /. Int.to_float !cnt in
-                   ratio_acc := !ratio_acc +. ratio;
-                   percentage_acc := !percentage_acc +. percentage);
-               cnt := 0);
-             incr sample)));
-      Deferred.never ()
-    ;;
-  end
-
-  let server_command =
-    Command.async_spec
-      ~summary:"test server for one-way and regular rpcs"
-      Command.Spec.(empty +> flag "port" (required int) ~doc:"" ++ Rpc_impl.spec ())
-      Server.main
-  ;;
-
-  let client_flags =
-    let open Command.Spec in
-    empty
-    +> flag "msg-per-sec" (required float) ~doc:""
-    +> flag "hostname" (required string) ~doc:""
-    +> flag "port" (required int) ~doc:""
-    ++ Rpc_impl.spec ()
-  ;;
-
-  let client_command =
-    Command.group
-      ~summary:"Clients"
-      [ ( "one-way"
-        , Command.async_spec
-            ~summary:"client for one-way rpc"
-            client_flags
-            one_way_client )
-      ; ( "rpc"
-        , Command.async_spec ~summary:"client for regular rpc" client_flags rpc_client )
-      ; ( "pipe"
-        , Command.async_spec
-            ~summary:"client for pipe rpc"
-            client_flags
-            Pipe_rpc_performance_measurements.Client.main )
-      ]
   ;;
 end
 
@@ -898,12 +481,6 @@ module Rpc_expert_test = struct
     Rpc_impl.Server.close server
   ;;
 
-  let command =
-    Command.async_spec
-      ~summary:"connect basic and low-level clients"
-      Command.Spec.(empty +> flag "debug" no_arg ~doc:"" ++ Rpc_impl.spec ())
-      main
-  ;;
 end
 
 module Connection_closing_test = struct
@@ -989,12 +566,6 @@ module Connection_closing_test = struct
     One_way.dispatch_exn one_way_unimplemented conn ();
     check_response_is_error [%here] conn response_deferred
   ;;
-
-  let command =
-    Command.async
-      ~summary:"test that responses are determined when connections are closed"
-      (Command.Param.return main)
-  ;;
 end
 
 let all_regression_tests =
@@ -1018,30 +589,6 @@ let () =
   Command.run
     (Command.group
        ~summary:"Various tests for rpcs"
-       [ ( "performance"
-         , Command.group
-             ~summary:"Plain rpc performance test"
-             [ "server", Rpc_performance_measurements.server_command
-             ; "client", Rpc_performance_measurements.client_command
-             ] )
-       ; ( "pipe"
-         , Command.group
-             ~summary:"Pipe rpc"
-             [ "simple", Pipe_simple_test.command
-             ; "closing", Pipe_closing_test.command
-             ; "iter", Pipe_iter_test.command
-             ; "direct", Pipe_direct_test.command
-             ] )
-       ; ( "expert"
-         , Command.group
-             ~summary:"Testing Expert interfaces"
-             [ "test", Rpc_expert_test.command ] )
-       ; ( "heartbeat"
-         , Command.group
-             ~summary:"Testing heartbeats"
-             [ "test-heartbeat-callback", Heartbeat_pipe_test.command ] )
-       ; "regression", all_regression_tests
-       ; "connection-inspector", Rpc_connection_inspector.command
-       ; "connection-close", Connection_closing_test.command
+       [ "regression", all_regression_tests
        ])
 ;;

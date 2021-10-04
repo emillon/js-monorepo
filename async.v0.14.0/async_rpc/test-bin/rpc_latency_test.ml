@@ -1,7 +1,16 @@
 open! Core
-open Jane
 open! Async
 open Rpc
+
+module Rstats = struct
+  let update_in_place _ _ = ()
+  let create () = ()
+  let min _ = 0.
+  let max _ = 0.
+  let mean _ = 0.
+  let stdev _ = 0.
+  let samples _ = 0
+end
 
 let () =
   if Time.Span.( > ) (Scheduler.event_precision ()) (Time.Span.of_us 1.)

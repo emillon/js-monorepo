@@ -6,4 +6,8 @@
 
 (package
  (name js-monorepo)
- (depends expect_test_helpers_async expect_test_helpers_core))
+ (depends
+  expect_test_helpers_async
+  expect_test_helpers_core
+  core_bench
+  qtest))

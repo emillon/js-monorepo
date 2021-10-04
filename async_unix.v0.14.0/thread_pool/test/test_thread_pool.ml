@@ -372,7 +372,7 @@ let%test_module _ =
         ("validation failed" (
           ()
           ("validation errors" (("" "value 0 < bound 1")))
-          lib/thread_pool_cpu_affinity/src/thread_pool_cpu_affinity.ml:LINE:COL)) |}]
+          core_kernel.v0.14.2/thread_pool_cpu_affinity/src/thread_pool_cpu_affinity.ml:LINE:COL)) |}]
     ;;
 
     let%expect_test "can affinitize to a single core" =

@@ -1,2 +1,3 @@
 (library (name thread_safe_pipe_test) (libraries async thread_safe_pipe)
- (preprocess (pps ppx_jane)))
+ (preprocess (pps ppx_jane))
+ (inline_tests))

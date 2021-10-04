@@ -1,0 +1,8 @@
+(library
+ (public_name ocaml_value_size)
+ (modules ocaml_value_size))
+
+(library
+ (public_name qtest_lib)
+ (modules qtest_lib)
+ (libraries async))

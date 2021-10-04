@@ -1,12 +1,19 @@
 (rule
  (alias default)
  (deps
-  (alias_rec install)
-  (alias_rec async_kernel.v0.14.0/all))
+  (alias_rec async_kernel.v0.14.0/all)
+  (alias_rec async_rpc_kernel.v0.14.0/all)
+  (alias_rec async_unix.v0.14.0/all)
+  (alias_rec async.v0.14.0/all)
+  (alias_rec install))
  (action (progn)))
 
 (rule
  (alias tests)
  (deps
-  (alias_rec async_kernel.v0.14.0/runtest))
+  (alias_rec async_kernel.v0.14.0/runtest)
+  (alias_rec async_rpc_kernel.v0.14.0/runtest)
+  (alias_rec async_unix.v0.14.0/runtest)
+  (alias_rec async.v0.14.0/runtest)
+  )
  (action (progn)))

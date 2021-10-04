@@ -1,0 +1,9 @@
+(lang dune 1.10)
+
+(generate_opam_files true)
+
+(package
+ (name ocaml_value_size))
+
+(package
+ (name qtest_lib))

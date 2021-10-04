@@ -185,7 +185,7 @@ let%expect_test "[Connection.create] shouldn't raise" =
   [%expect
     {|
     (Returned
-     (connection.ml.Handshake_error.Handshake_error
+     (async_rpc_kernel.v0.14.0/src/connection.ml.Handshake_error.Handshake_error
       ((Reading_header_failed
         (monitor.ml.Error
          (Failure "unsafe_read_int64: value cannot be represented unboxed!")

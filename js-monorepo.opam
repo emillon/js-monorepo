@@ -4,6 +4,8 @@ depends: [
   "dune" {>= "2.9"}
   "expect_test_helpers_async"
   "expect_test_helpers_core"
+  "core_bench"
+  "qtest"
   "odoc" {with-doc}
 ]
 build: [

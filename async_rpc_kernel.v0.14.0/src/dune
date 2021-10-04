@@ -3,4 +3,5 @@
   (pps ppx_jane -allow-unannotated-ignores
    -dont-check-doc-comments-attachment))
  (libraries async_kernel core_kernel
-  async_kernel.persistent_connection_kernel protocol_version_header))
+  async_kernel.persistent_connection_kernel protocol_version_header)
+ (inline_tests))
