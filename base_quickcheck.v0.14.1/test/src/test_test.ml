@@ -60,7 +60,7 @@ let%expect_test "run_exn" =
     {|
     ("Base_quickcheck.Test.run: test failed"
      (input ((false) ()))
-     (error "Assert_failure test_test.ml:LINE:COL")) |}];
+     (error "Assert_failure base_quickcheck.v0.14.1/test/src/test_test.ml:LINE:COL")) |}];
   (* failure without shrinking *)
   require_does_raise [%here] ~hide_positions:true (fun () ->
     Test.run_exn ~config ~f:failure (module M_without_shrinker));
@@ -68,7 +68,7 @@ let%expect_test "run_exn" =
     {|
     ("Base_quickcheck.Test.run: test failed"
      (input (() () (false) (true) (false) ()))
-     (error "Assert_failure test_test.ml:LINE:COL")) |}];
+     (error "Assert_failure base_quickcheck.v0.14.1/test/src/test_test.ml:LINE:COL")) |}];
   (* failure from examples *)
   require_does_raise [%here] ~hide_positions:true (fun () ->
     Test.run_exn
@@ -80,7 +80,7 @@ let%expect_test "run_exn" =
     {|
     ("Base_quickcheck.Test.run: test failed"
      (input ((true) ()))
-     (error "Assert_failure test_test.ml:LINE:COL")) |}];
+     (error "Assert_failure base_quickcheck.v0.14.1/test/src/test_test.ml:LINE:COL")) |}];
   (* failure from examples without shrinking *)
   require_does_raise [%here] ~hide_positions:true (fun () ->
     Test.run_exn
@@ -92,7 +92,7 @@ let%expect_test "run_exn" =
     {|
     ("Base_quickcheck.Test.run: test failed"
      (input ((true) (true) () (true) (true)))
-     (error "Assert_failure test_test.ml:LINE:COL")) |}]
+     (error "Assert_failure base_quickcheck.v0.14.1/test/src/test_test.ml:LINE:COL")) |}]
 ;;
 
 let with_sample = Test.with_sample

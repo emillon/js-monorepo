@@ -12,3 +12,5 @@
 (rule (targets ppx_quickcheck_test_examples_mli_pp.output) (mode fallback)
  (deps (:first_dep ppx_quickcheck_test_examples.mli.pp))
  (action (bash "cp %{first_dep} %{targets}")))
+
+(env (_ (flags :standard -w -26)))

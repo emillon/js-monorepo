@@ -454,7 +454,7 @@ let%expect_test "escaped" =
        ((1 a (true)) (1 b (true)))
        ((2 a ()) (2 b ()))
        ((2 a (true)) (2 b (true))))))
-    (* require-failed: lib/base_quickcheck/test/helpers/base_quickcheck_test_helpers.ml:LINE:COL. *)
+    (* require-failed: base_quickcheck.v0.14.1/test/helpers/base_quickcheck_test_helpers.ml:LINE:COL. *)
     "did not generate any single function that distinguishes all values"
     (shrinker atomic) |}]
 ;;
@@ -481,7 +481,7 @@ let%expect_test "wildcard" =
     {|
     (generator "generated 2_248 distinct values in 10_000 iterations")
     (observer (partitions ((()) ((false) (true)) ((false true) (true false)))))
-    (* require-failed: lib/base_quickcheck/test/helpers/base_quickcheck_test_helpers.ml:LINE:COL. *)
+    (* require-failed: base_quickcheck.v0.14.1/test/helpers/base_quickcheck_test_helpers.ml:LINE:COL. *)
     "did not generate any single function that distinguishes all values"
     (shrinker
      (((false) => ())
