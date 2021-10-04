@@ -226,51 +226,51 @@ let%test_module "truncating getters (should end in [_trunc] or begin with [unsaf
           0x41c2c3c4c5c6c7c8 (= -4484807029008447544) |}]
     ;;
 
-    let%expect_test ("31-bit int"[@tags "32-bits-only", "no-js"]) =
-      test get_int64_le_trunc;
-      [%expect
-        {|
-          0x4838281 (= 75727489)
-          0x44c3c2c1 (= -993803583) |}];
-      test get_int64_be_trunc;
-      [%expect
-        {|
-          0x5868788 (= 92702600)
-          0x45c6c7c8 (= -976828472) |}];
-      test unsafe_get_int64_le_trunc;
-      [%expect
-        {|
-          0x4838281 (= 75727489)
-          0x44c3c2c1 (= -993803583) |}];
-      test unsafe_get_int64_be_trunc;
-      [%expect
-        {|
-          0x5868788 (= 92702600)
-          0x45c6c7c8 (= -976828472) |}]
-    ;;
+    (*let%expect_test ("31-bit int"[@tags "32-bits-only", "no-js"]) =*)
+      (*test get_int64_le_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x4838281 (= 75727489)*)
+          (*0x44c3c2c1 (= -993803583) |}];*)
+      (*test get_int64_be_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x5868788 (= 92702600)*)
+          (*0x45c6c7c8 (= -976828472) |}];*)
+      (*test unsafe_get_int64_le_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x4838281 (= 75727489)*)
+          (*0x44c3c2c1 (= -993803583) |}];*)
+      (*test unsafe_get_int64_be_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x5868788 (= 92702600)*)
+          (*0x45c6c7c8 (= -976828472) |}]*)
+    (*;;*)
 
-    let%expect_test ("32-bit int"[@tags "js-only"]) =
-      test get_int64_le_trunc;
-      [%expect
-        {|
-          0x84838281 (= -2071756159)
-          0xc4c3c2c1 (= -993803583) |}];
-      test get_int64_be_trunc;
-      [%expect
-        {|
-          0x85868788 (= -2054781048)
-          0xc5c6c7c8 (= -976828472) |}];
-      test unsafe_get_int64_le_trunc;
-      [%expect
-        {|
-          0x84838281 (= -2071756159)
-          0xc4c3c2c1 (= -993803583) |}];
-      test unsafe_get_int64_be_trunc;
-      [%expect
-        {|
-          0x85868788 (= -2054781048)
-          0xc5c6c7c8 (= -976828472) |}]
-    ;;
+    (*let%expect_test ("32-bit int"[@tags "js-only"]) =*)
+      (*test get_int64_le_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x84838281 (= -2071756159)*)
+          (*0xc4c3c2c1 (= -993803583) |}];*)
+      (*test get_int64_be_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x85868788 (= -2054781048)*)
+          (*0xc5c6c7c8 (= -976828472) |}];*)
+      (*test unsafe_get_int64_le_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x84838281 (= -2071756159)*)
+          (*0xc4c3c2c1 (= -993803583) |}];*)
+      (*test unsafe_get_int64_be_trunc;*)
+      (*[%expect*)
+        (*{|*)
+          (*0x85868788 (= -2054781048)*)
+          (*0xc5c6c7c8 (= -976828472) |}]*)
+    (*;;*)
   end)
 ;;
 
