@@ -44,7 +44,7 @@ let%expect_test _ =
 ;;
 
 let%expect_test _ =
-  match to_exn (of_exn (Failure "foo")) with
+  match[@warning "-52"] to_exn (of_exn (Failure "foo")) with
   | Failure "foo" -> ()
   | exn -> raise_s [%sexp { got = (exn : exn); expected = Failure "foo" }]
 ;;

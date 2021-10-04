@@ -5,6 +5,7 @@
   (alias_rec async_rpc_kernel.v0.14.0/all)
   (alias_rec async_unix.v0.14.0/all)
   (alias_rec async.v0.14.0/all)
+  (alias_rec base.v0.14.1/all)
   (alias_rec install))
  (action (progn)))
 
@@ -15,5 +16,6 @@
   (alias_rec async_rpc_kernel.v0.14.0/runtest)
   (alias_rec async_unix.v0.14.0/runtest)
   (alias_rec async.v0.14.0/runtest)
+  (alias_rec base.v0.14.1/runtest)
   )
  (action (progn)))
