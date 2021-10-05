@@ -15,7 +15,7 @@
   (alias_rec jane-street-headers.v0.14.0/all)
   (alias_rec jst-config.v0.14.1/all)
   (alias_rec ocaml-compiler-libs.v0.12.4/all)
-  ;(alias_rec parsexp.v0.14.1/all) ; requires afl-persistent port
+  (alias_rec parsexp.v0.14.1/all)
   (alias_rec ppx_assert.v0.14.0/all)
   (alias_rec ppx_base.v0.14.0/all)
   (alias_rec ppx_bench.v0.14.1/all)
