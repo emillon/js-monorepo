@@ -12,9 +12,9 @@ let extension_node = [%sexp_grammar: int]
 
 let%expect_test "toplevel" =
   test t_sexp_grammar;
-  [%expect {| test_origin.ml |}];
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml |}];
   test extension_node;
-  [%expect {| test_origin.ml |}]
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml |}]
 ;;
 
 module Foo = struct
@@ -25,9 +25,9 @@ end
 
 let%expect_test "[Foo]" =
   test Foo.t_sexp_grammar;
-  [%expect {| test_origin.ml.Foo |}];
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml.Foo |}];
   test Foo.extension_node;
-  [%expect {| test_origin.ml.Foo |}]
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml.Foo |}]
 ;;
 
 module F (M : sig
@@ -45,9 +45,9 @@ module F_foo = F (Foo)
    definition rather than the functor application. *)
 let%expect_test "[F_foo]" =
   test F_foo.t_sexp_grammar;
-  [%expect {| test_origin.ml.F |}];
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml.F |}];
   test F_foo.extension_node;
-  [%expect {| test_origin.ml.F |}]
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml.F |}]
 ;;
 
 let m__t_sexp_grammar, m__extension_node =
@@ -66,7 +66,7 @@ let m__t_sexp_grammar, m__extension_node =
    disambiguate multiple evaluations of that expression? *)
 let%expect_test "modules in expressions" =
   test m__t_sexp_grammar;
-  [%expect {| test_origin.ml |}];
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml |}];
   test m__extension_node;
-  [%expect {| test_origin.ml |}]
+  [%expect {| ppx_sexp_conv.v0.14.3/test/expect/test_origin.ml |}]
 ;;

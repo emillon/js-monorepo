@@ -44,9 +44,9 @@ let%expect_test "double pattern map" =
   [%expect
     {|
     let () =
-      let __let_syntax__001_ = MY_EXPR_1
-      and __let_syntax__002_ = MY_EXPR_2 in
-      Let_syntax.map2 __let_syntax__001_ __let_syntax__002_
+      let __let_syntax__006_ = MY_EXPR_1
+      and __let_syntax__007_ = MY_EXPR_2 in
+      Let_syntax.map2 __let_syntax__006_ __let_syntax__007_
         ~f:(fun (MY_PAT_1) -> fun (MY_PAT_2) -> MY_BODY) |}]
 ;;
 
@@ -77,9 +77,9 @@ let%expect_test "double pattern map open" =
   [%expect
     {|
     let () =
-      let __let_syntax__003_ = let open! Let_syntax.Open_on_rhs in MY_EXPR_1
-      and __let_syntax__004_ = let open! Let_syntax.Open_on_rhs in MY_EXPR_2 in
-      Let_syntax.map2 __let_syntax__003_ __let_syntax__004_
+      let __let_syntax__008_ = let open! Let_syntax.Open_on_rhs in MY_EXPR_1
+      and __let_syntax__009_ = let open! Let_syntax.Open_on_rhs in MY_EXPR_2 in
+      Let_syntax.map2 __let_syntax__008_ __let_syntax__009_
         ~f:(fun (MY_PAT_1) -> fun (MY_PAT_2) -> MY_BODY) |}]
 ;;
 
@@ -97,12 +97,12 @@ let%expect_test "quadruple pattern map" =
   [%expect
     {|
     let () =
-      let __let_syntax__005_ = MY_EXPR_1
-      and __let_syntax__006_ = MY_EXPR_2
-      and __let_syntax__007_ = MY_EXPR_3
-      and __let_syntax__008_ = MY_EXPR_4 in
-      Let_syntax.map4 __let_syntax__005_ __let_syntax__006_ __let_syntax__007_
-        __let_syntax__008_
+      let __let_syntax__010_ = MY_EXPR_1
+      and __let_syntax__011_ = MY_EXPR_2
+      and __let_syntax__012_ = MY_EXPR_3
+      and __let_syntax__013_ = MY_EXPR_4 in
+      Let_syntax.map4 __let_syntax__010_ __let_syntax__011_ __let_syntax__012_
+        __let_syntax__013_
         ~f:(fun (MY_PAT_1) ->
               fun (MY_PAT_2) ->
                 fun (SUB_PATTERN_1, SUB_PATTERN_2) -> fun (MY_PAT_4) -> MY_BODY) |}]
@@ -122,12 +122,12 @@ let%expect_test "quadruple pattern bind" =
   [%expect
     {|
     let () =
-      let __let_syntax__009_ = MY_EXPR_1
-      and __let_syntax__010_ = MY_EXPR_2
-      and __let_syntax__011_ = MY_EXPR_3
-      and __let_syntax__012_ = MY_EXPR_4 in
-      Let_syntax.bind4 __let_syntax__009_ __let_syntax__010_ __let_syntax__011_
-        __let_syntax__012_
+      let __let_syntax__014_ = MY_EXPR_1
+      and __let_syntax__015_ = MY_EXPR_2
+      and __let_syntax__016_ = MY_EXPR_3
+      and __let_syntax__017_ = MY_EXPR_4 in
+      Let_syntax.bind4 __let_syntax__014_ __let_syntax__015_ __let_syntax__016_
+        __let_syntax__017_
         ~f:(fun (MY_PAT_1) ->
               fun (MY_PAT_2) ->
                 fun (SUB_PATTERN_1, SUB_PATTERN_2) -> fun (MY_PAT_4) -> MY_BODY) |}]
