@@ -15,11 +15,11 @@ let%expect_test _ =
     (raised (
       "Flags.create got invalid ~bit (must be between 0 and 62)"
       -1
-      lib/flags/src/flags.ml:LINE:COL))
+      core_kernel.v0.14.2/flags/src/flags.ml:LINE:COL))
     (raised (
       "Flags.create got invalid ~bit (must be between 0 and 62)"
       63
-      lib/flags/src/flags.ml:LINE:COL)) |}]
+      core_kernel.v0.14.2/flags/src/flags.ml:LINE:COL)) |}]
 ;;
 
 let%expect_test _ =

@@ -6,6 +6,8 @@ depends: [
   "expect_test_helpers_core"
   "core_bench"
   "qtest"
+  "re2"
+  "ounit2"
   "odoc" {with-doc}
 ]
 build: [

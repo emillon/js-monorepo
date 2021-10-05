@@ -6,6 +6,7 @@ depends: [
   "base-bytes" {= "base"}
   "base-threads" {= "base"}
   "base-unix" {= "base"}
+  "conf-g++" {= "1.0"}
   "core_bench" {= "v0.14.0"}
   "csexp" {= "1.5.1"}
   "dune" {= "2.9.1"}
@@ -29,12 +30,22 @@ depends: [
   "qcheck-ounit" {= "0.18"}
   "qtest" {= "2.11.2"}
   "re" {= "1.10.3"}
+  "re2" {= "v0.14.0"}
   "result" {= "1.5"}
   "seq" {= "base+dune"}
   "sexp_pretty" {= "v0.14.0"}
   "stdlib-shims" {= "0.3.0"}
 ]
-depexts: ["linux-headers"] {os-distribution = "alpine"}
+depexts: [
+  ["g++"] {os-family = "debian"}
+  ["gcc"] {os-distribution = "arch"}
+  ["gcc"] {os-distribution = "nixos"}
+  ["gcc"] {os = "macos" & os-distribution = "homebrew"}
+  ["gcc-c++"] {os-distribution = "centos"}
+  ["gcc-c++"] {os-distribution = "fedora"}
+  ["gcc-c++"] {os-family = "suse"}
+  ["linux-headers"] {os-distribution = "alpine"}
+]
 pin-depends: [
   [
     "core_bench.v0.14.0"
@@ -103,6 +114,10 @@ pin-depends: [
   [
     "re.1.10.3"
     "https://github.com/ocaml/ocaml-re/releases/download/1.10.3/re-1.10.3.tbz"
+  ]
+  [
+    "re2.v0.14.0"
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/re2-v0.14.0.tar.gz"
   ]
   [
     "result.1.5"
@@ -244,6 +259,11 @@ x-opam-monorepo-duniverse-dirs: [
     ["md5=d1abf39007394165bedb119e9a7d7404"]
   ]
   [
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/re2-v0.14.0.tar.gz"
+    "re2"
+    ["md5=1ba423969e51a6a226d19f4cbb898719"]
+  ]
+  [
     "https://ocaml.janestreet.com/ocaml-core/v0.14/files/sexp_pretty-v0.14.0.tar.gz"
     "sexp_pretty"
     ["md5=032098e1eb1cf5885c3bcc43200a8e71"]
@@ -296,6 +316,7 @@ x-opam-monorepo-root-packages: [
   "ppx_typerep_conv"
   "ppx_variants_conv"
   "protocol_version_header"
+  "qtest_lib"
   "sexplib"
   "sexplib0"
   "spawn"

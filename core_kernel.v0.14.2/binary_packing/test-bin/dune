@@ -2,6 +2,6 @@
  (action (bash ./%{first_dep})))
 
 (executables (names test_binary_packing)
- (libraries binary_packing binary_packing_test core oUnit
+ (libraries binary_packing binary_packing_test core ounit2
   quickcheck_deprecated)
  (preprocess (pps ppx_jane)))

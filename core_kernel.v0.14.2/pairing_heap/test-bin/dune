@@ -2,5 +2,5 @@
  (action (bash ./%{first_dep})))
 
 (executables (names test_pairing_heap)
- (libraries core pairing_heap oUnit quickcheck_deprecated)
+ (libraries core pairing_heap ounit2 quickcheck_deprecated)
  (preprocess (pps ppx_jane -allow-unannotated-ignores)))

@@ -10,4 +10,6 @@
   expect_test_helpers_async
   expect_test_helpers_core
   core_bench
-  qtest))
+  qtest
+  re2
+  ounit2))

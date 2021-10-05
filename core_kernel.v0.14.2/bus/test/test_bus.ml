@@ -134,7 +134,9 @@ struct
           (exn "subscriber raising")
           (backtrace ("<backtrace elided in test>"))
           (subscriber (
-            Bus.Subscriber.t (subscribed_from lib/bus/test/test_bus.ml:LINE:COL))))) |}]
+            Bus.Subscriber.t (
+              (subscribers_index 0)
+              (subscribed_from core_kernel.v0.14.2/bus/test/test_bus.ml:LINE:COL)))))) |}]
     ;;
 
     let%expect_test "~on_subscription_after_first_write:Raise" =
@@ -302,14 +304,15 @@ struct
         ((extract_exn false)
          (error (
            "Bus subscriber raised"
-           (exn "Assert_failure test_bus.ml:LINE:COL")
+           (exn "Assert_failure core_kernel.v0.14.2/bus/test/test_bus.ml:LINE:COL")
            (backtrace ("<backtrace elided in test>"))
            (subscriber (
              Bus.Subscriber.t (
+               (subscribers_index 0)
                (on_callback_raise <fun>)
-               (subscribed_from   lib/bus/test/test_bus.ml:LINE:COL)))))))
+               (subscribed_from core_kernel.v0.14.2/bus/test/test_bus.ml:LINE:COL)))))))
         ((extract_exn true)
-         (error       "Assert_failure test_bus.ml:LINE:COL")) |}]
+         (error "Assert_failure core_kernel.v0.14.2/bus/test/test_bus.ml:LINE:COL")) |}]
     ;;
 
     let%expect_test "subscribe_exn ~on_callback_raise:raise" =
@@ -357,12 +360,12 @@ struct
         (raised (
           "[Bus.write] called on closed bus"
           ((callback_arity Arity1)
-           (created_from   lib/bus/test/test_bus.ml:LINE:COL)
+           (created_from core_kernel.v0.14.2/bus/test/test_bus.ml:LINE:COL)
            (on_subscription_after_first_write Raise)
            (state                             Closed)
            (write_ever_called                 true)
            (subscribers ()))
-          lib/bus/src/bus.ml:LINE:COL)) |}]
+          core_kernel.v0.14.2/bus/src/bus.ml:LINE:COL)) |}]
     ;;
 
     let%expect_test "[subscribe_exn] does not raise after [close], and [on_close] is \

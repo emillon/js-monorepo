@@ -7,3 +7,6 @@
 
 (package
  (name qtest_lib))
+
+(package
+ (name quickcheck_deprecated))

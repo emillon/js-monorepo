@@ -66,7 +66,7 @@ let%test _ =
 let%test _ = Result.is_error (find_map_ok ~f:(fun _ -> assert false) [])
 
 let%test _ =
-  try
+  try[@warning "-52"]
     let (_ : _ t) = find_map_ok ~f:(fun _ -> raise (Failure "abc")) [ 1 ] in
     false
   with

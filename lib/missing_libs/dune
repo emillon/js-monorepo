@@ -6,3 +6,11 @@
  (public_name qtest_lib)
  (modules qtest_lib)
  (libraries async))
+
+(library
+ (public_name quickcheck_deprecated)
+ (modules quickcheck_deprecated)
+ (libraries core)
+ (flags :standard -safe-string)
+ (preprocess
+  (pps ppx_jane ppxlib.runner)))
