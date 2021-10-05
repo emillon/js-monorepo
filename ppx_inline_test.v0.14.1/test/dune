@@ -6,6 +6,7 @@
    ((pps ppx_inline_test_drop) drop))))
 
 (rule (targets test.output test-partitions.output test-inlining.output)
+ (enabled_if false)
  (deps ./inline_tests_runner ./inline_tests_runner.exe)
  (action
   (bash

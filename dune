@@ -29,7 +29,7 @@
   (alias_rec ppx_fixed_literal.v0.14.0/all)
   (alias_rec ppx_hash.v0.14.0/all)
   (alias_rec ppx_here.v0.14.0/all)
-;  (alias_rec ppx_inline_test.v0.14.1/all)
+  (alias_rec ppx_inline_test.v0.14.1/all)
   (alias_rec ppx_jane.v0.14.0/all)
   (alias_rec ppx_js_style.v0.14.1/all)
   (alias_rec ppx_let.v0.14.0/all)
