@@ -19,7 +19,7 @@ let%test_module "Stable.V1" =
       [%expect
         {|
         (Of_sexp_error
-         "lib/core_kernel/src/nothing.ml.Stable.V1.t_of_sexp: trying to convert an empty type"
+         "core_kernel.v0.14.2/src/nothing.ml.Stable.V1.t_of_sexp: trying to convert an empty type"
          (invalid_sexp ())) |}]
     ;;
   end)

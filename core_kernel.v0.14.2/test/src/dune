@@ -1,3 +1,14 @@
-(library (name core_kernel_test)
+(library
+ (name core_kernel_test)
  (libraries base_test_helpers core_kernel expect_test_helpers_core fheap)
- (preprocessor_deps ../../src/config.h) (preprocess (pps ppx_jane)))
+ (preprocessor_deps
+  ../../src/config.h
+  (env_var TESTING_FRAMEWORK))
+ (preprocess
+  (pps ppx_jane))
+ (inline_tests))
+
+(env
+ (_
+  (env-vars
+   (TESTING_FRAMEWORK inline-test))))

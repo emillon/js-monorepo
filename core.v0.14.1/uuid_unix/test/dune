@@ -1,3 +1,13 @@
-(library (name uuid_unix_test)
+(library
+ (name uuid_unix_test)
  (libraries core expect_test_helpers_core uuid_unix)
- (preprocess (pps ppx_jane)))
+ (preprocess
+  (pps ppx_jane))
+ (preprocessor_deps
+  (env_var TESTING_FRAMEWORK))
+ (inline_tests))
+
+(env
+ (_
+  (env-vars
+   (TESTING_FRAMEWORK inline-test))))

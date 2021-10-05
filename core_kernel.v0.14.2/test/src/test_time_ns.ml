@@ -881,53 +881,53 @@ let%expect_test "time zone invalid offset parsing" =
      Ofday_helpers.ml) unless someone cares *)
   [%expect
     {|
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-0:"
      ("Time.Ofday: invalid string"
       0:
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-00:"
      ("Time.Ofday: invalid string"
       00:
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-0:0"
      ("Time.Ofday: invalid string"
       0:0
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-00:0"
      ("Time.Ofday: invalid string"
       00:0
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-:"
      (Invalid_argument "index out of bounds"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-:00"
      (Failure "Char.get_digit_exn ':': not a digit"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-"
      (Invalid_argument "index out of bounds")) |}];
   test [%here] "2000-01-01 12:34:56.789012-25:00";
   test [%here] "2000-01-01 12:34:56.789012-25";
   [%expect
     {|
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012-25:00"
      ("Time.Ofday: invalid string" 25:00 "hours out of bounds"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012-25"
      ("Time.Ofday: invalid string" 25:00 "hours out of bounds")) |}];
   test [%here] "2000-01-01 12:34:56.789012--1:00";
   test [%here] "2000-01-01 12:34:56.789012--1";
   [%expect
     {|
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012--1:00"
      (Failure "Char.get_digit_exn '-': not a digit"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (core_kernel.v0.14.2/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012--1"
      (Invalid_argument "index out of bounds")) |}]
 ;;

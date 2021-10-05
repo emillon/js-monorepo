@@ -1064,7 +1064,7 @@ let%expect_test "Time_ns.Span.Stable.V1" =
     ((sexp   11.2754s)
      (bin_io "\252\128\143\017\160\002\000\000\000")
      (int63  11275440000))
-    (* require-failed: lib/core/test/src/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: core.v0.14.1/test/src/test_time_ns.ml:LINE:COL. *)
     ("sexp serialization failed to round-trip"
       (original       11.2754s)
       (sexp           11.2754s)
@@ -1321,7 +1321,7 @@ let%expect_test "Time_ns.Span.Option.Stable.V1" =
     ((sexp (11.2754s))
      (bin_io "\252\128\143\017\160\002\000\000\000")
      (int63  11275440000))
-    (* require-failed: lib/core/test/src/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: core.v0.14.1/test/src/test_time_ns.ml:LINE:COL. *)
     ("sexp serialization failed to round-trip"
       (original       (11.2754s))
       (sexp           (11.2754s))
@@ -1665,10 +1665,10 @@ let%test_module "Time_ns.Span" =
         {|
         ("Time_ns.Span does not support this span"
          51240d
-         lib/core_kernel/src/span_ns.ml:LINE:COL)
+         core_kernel.v0.14.2/src/span_ns.ml:LINE:COL)
         ("Time_ns.Span does not support this span"
          -51240d
-         lib/core_kernel/src/span_ns.ml:LINE:COL) |}]
+         core_kernel.v0.14.2/src/span_ns.ml:LINE:COL) |}]
     ;;
 
     let%expect_test "Span.to_string_hum" =
@@ -1847,7 +1847,7 @@ let%test_module "Time_ns.Span.Option" =
         some (Time_ns.Span.of_int63_ns (Time_ns.Span.Option.Stable.V1.to_int63 none)));
       [%expect
         {|
-          (lib/core/src/core_time_ns.ml:LINE:COL
+          (core.v0.14.1/src/core_time_ns.ml:LINE:COL
            "Span.Option.some value not representable"
            (span -53375d23h53m38.427387904s)) |}]
     ;;
@@ -2346,7 +2346,7 @@ let%test_module "Time_ns.Option" =
     let%expect_test "value_exn none" =
       require_does_raise [%here] ~hide_positions:true (fun () -> value_exn none);
       [%expect
-        {| (lib/core/src/core_time_ns.ml:LINE:COL "Span.Option.value_exn none") |}]
+        {| (core.v0.14.1/src/core_time_ns.ml:LINE:COL "Span.Option.value_exn none") |}]
     ;;
   end)
 ;;
@@ -2380,7 +2380,7 @@ let%test_module "Time_ns.Ofday.Option" =
     let%expect_test "value_exn none" =
       require_does_raise [%here] ~hide_positions:true (fun () -> value_exn none);
       [%expect
-        {| (lib/core/src/core_time_ns.ml:LINE:COL "Span.Option.value_exn none") |}]
+        {| (core.v0.14.1/src/core_time_ns.ml:LINE:COL "Span.Option.value_exn none") |}]
     ;;
 
     let%expect_test "of_span_since_start_of_day" =

@@ -329,6 +329,7 @@ module Example = struct
 
   let object_size = 3
 
+  (*
   let%expect_test "bin reading allocation" [@tags "64-bits-only"] =
     let buf = pack [ t; ] in
     let pos_ref = ref 0 in
@@ -340,6 +341,7 @@ module Example = struct
       : int);
     [%expect {||}];
   ;;
+  *)
 
   let%expect_test "confirm object size" =
     ignore (

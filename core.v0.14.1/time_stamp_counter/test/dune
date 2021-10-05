@@ -1,5 +1,17 @@
-(library (name time_stamp_counter_test) (libraries core time_stamp_counter)
- (preprocessor_deps config.h) (preprocess (pps ppx_jane)))
+(library
+ (name time_stamp_counter_test)
+ (libraries core time_stamp_counter)
+ (preprocessor_deps
+   config.h
+   time_stamp_counter_samples_at_1sec.sexp
+   time_stamp_counter_samples_at_60sec.sexp
+   (env_var TZ))
+ (preprocess (pps ppx_jane))
+ (inline_tests))
 
 (rule (targets config.h) (deps)
  (action (bash "cp %{lib:jst-config:config.h} .")))
+
+(env
+ (_
+  (env-vars (TZ Etc/GMT+5))))

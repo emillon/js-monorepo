@@ -445,7 +445,8 @@ let%expect_test "eager parser incorrect mutation" =
   state := P.State.create got_sexp;
   show_raise ~hide_positions:true (fun () -> hot_loop !state stream P.Stack.empty);
   [%expect {|
-    (raised "Assert_failure parser_automaton_internal.ml:LINE:COL")
+    (raised
+     "Assert_failure parsexp.v0.14.1/src/parser_automaton_internal.ml:LINE:COL")
   |}]
 ;;
 

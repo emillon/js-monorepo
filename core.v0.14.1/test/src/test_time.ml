@@ -2487,7 +2487,7 @@ let%test_module "Time.Stable" =
         {|
         (raised (
           Of_sexp_error
-          "Time.t_of_sexp: (time.ml.Make.Time_of_string \"2000-01-01 00:00:00.000000\"\n  (core_time.ml.Make.Time_string_not_absolute \"2000-01-01 00:00:00.000000\"))"
+          "Time.t_of_sexp: (core_kernel.v0.14.2/src/time.ml.Make.Time_of_string\n  \"2000-01-01 00:00:00.000000\"\n  (core.v0.14.1/src/core_time.ml.Make.Time_string_not_absolute\n    \"2000-01-01 00:00:00.000000\"))"
           (invalid_sexp (2000-01-01 00:00:00.000000)))) |}]
     ;;
   end)
@@ -2523,7 +2523,7 @@ let%test_module "Time.Stable.Span" =
          (bin_io "\000\000\000\000\000\000\000\000"))
         ((sexp   1e-06ms)
          (bin_io "\149\214&\232\011.\017>"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       1e-06ms)
           (sexp           1e-06ms)
@@ -2542,7 +2542,7 @@ let%test_module "Time.Stable.Span" =
          (bin_io "\000\000\000\000\000\024\245@"))
         ((sexp   1.04237d)
          (bin_io ")\160\025\004\208\252\245@"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       1.04237d)
           (sexp           1.04237d)
@@ -2613,7 +2613,7 @@ let%test_module "Time.Stable.Ofday" =
          (bin_io "\000\000\000\000\000\024\229@"))
         ((sexp   23:59:29.999999)
          (bin_io "\144\243\254\255\031\022\245@"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       23:59:29.999999)
           (sexp           23:59:29.999999)
@@ -2634,14 +2634,14 @@ let%test_module "Time.Stable.Ofday" =
          (bin_io "\208&\135O\177\157\209@"))
         ((sexp   20:30:29.782106)
          (bin_io "\193\148\129\131\\\006\242@"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       20:30:29.782106)
           (sexp           20:30:29.782106)
           (sexp_roundtrip 20:30:29.782106))
         ((sexp   06:18:35.327424)
          (bin_io "\252\202\131\244\212.\214@"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       06:18:35.327424)
           (sexp           06:18:35.327424)
@@ -2673,7 +2673,7 @@ let%test_module "Time.Stable.Ofday" =
          (bin_io "\000\000\000\000\000\000\000\000\003UTC"))
         ((sexp (12:00:00.000000 UTC)) (bin_io "\000\000\000\000\000\024\229@\003UTC"))
         ((sexp (23:59:29.999999 UTC)) (bin_io "\144\243\254\255\031\022\245@\003UTC"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       (23:59:29.999999 UTC))
           (sexp           (23:59:29.999999 UTC))
@@ -2686,13 +2686,13 @@ let%test_module "Time.Stable.Ofday" =
         ((sexp (24:00:00.000000 UTC)) (bin_io "\000\000\000\000\000\024\245@\003UTC"))
         ((sexp (05:00:38.770479 UTC)) (bin_io "\208&\135O\177\157\209@\003UTC"))
         ((sexp (20:30:29.782106 UTC)) (bin_io "\193\148\129\131\\\006\242@\003UTC"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       (20:30:29.782106 UTC))
           (sexp           (20:30:29.782106 UTC))
           (sexp_roundtrip (20:30:29.782106 UTC)))
         ((sexp (06:18:35.327424 UTC)) (bin_io "\252\202\131\244\212.\214@\003UTC"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       (06:18:35.327424 UTC))
           (sexp           (06:18:35.327424 UTC))
@@ -2705,7 +2705,7 @@ let%test_module "Time.Stable.Ofday" =
          (bin_io "\000\000\000\000\000\024\229@\016America/New_York"))
         ((sexp (23:59:29.999999 America/New_York))
          (bin_io "\144\243\254\255\031\022\245@\016America/New_York"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       (23:59:29.999999 America/New_York))
           (sexp           (23:59:29.999999 America/New_York))
@@ -2726,14 +2726,14 @@ let%test_module "Time.Stable.Ofday" =
          (bin_io "\208&\135O\177\157\209@\016America/New_York"))
         ((sexp (20:30:29.782106 America/New_York))
          (bin_io "\193\148\129\131\\\006\242@\016America/New_York"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       (20:30:29.782106 America/New_York))
           (sexp           (20:30:29.782106 America/New_York))
           (sexp_roundtrip (20:30:29.782106 America/New_York)))
         ((sexp (06:18:35.327424 America/New_York))
          (bin_io "\252\202\131\244\212.\214@\016America/New_York"))
-        (* require-failed: lib/core/test/src/test_time.ml:LINE:COL. *)
+        (* require-failed: core.v0.14.1/test/src/test_time.ml:LINE:COL. *)
         ("sexp serialization failed to round-trip"
           (original       (06:18:35.327424 America/New_York))
           (sexp           (06:18:35.327424 America/New_York))

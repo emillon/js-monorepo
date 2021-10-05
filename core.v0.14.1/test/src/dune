@@ -1,4 +1,18 @@
 (library (name core_test)
  (libraries async bignum.bigint core expect_test_helpers_async
   expect_test_helpers_core core_kernel.version_util)
- (preprocess (pps ppx_jane -allow-unannotated-ignores)))
+ (preprocessor_deps
+  (env_var TESTING_FRAMEWORK)
+  (env_var TZ)
+  ../bin/thread_on_uncaught_exn.exe
+  ../bin/am_running_inline_test.exe
+  ../bin/command_shape_test_parent.exe
+  ../bin/command_shape_test_child.exe)
+ (preprocess (pps ppx_jane -allow-unannotated-ignores))
+ (inline_tests))
+
+(env
+ (_
+  (env-vars
+   (TZ US/Eastern)
+   (TESTING_FRAMEWORK inline-test))))

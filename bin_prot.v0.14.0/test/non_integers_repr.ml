@@ -616,7 +616,7 @@ let%expect_test "Non-integer bin_prot size tests" =
   |}];
   gen_tests Tests.float_nan;
   [%expect {|
-    7f f{8,0} 00 00 00 00 00 01 -> NAN (glob)
+    7f f0 00 00 00 00 00 01 -> NAN
   |}];
   gen_tests Tests.vec;
   [%expect

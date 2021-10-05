@@ -196,7 +196,7 @@ let%expect_test "[choose_one] duplicate name" =
     (raised (
       "[Command.Spec.choose_one] called with duplicate name"
       (-foo)
-      lib/core_kernel/src/command.ml:LINE:COL)) |}]
+      core_kernel.v0.14.2/src/command.ml:LINE:COL)) |}]
 ;;
 
 let run_command param ~args =
@@ -243,7 +243,7 @@ let%expect_test "[choose_one]" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}];
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}];
   test [] ~if_nothing_chosen:Return_none;
   [%expect {| (arg ()) |}];
   test ~if_nothing_chosen:Return_none [ "-bar" ];
@@ -267,7 +267,7 @@ let%expect_test "[choose_one]" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}]
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}]
 ;;
 
 let%expect_test "nested [choose_one]" =
@@ -302,7 +302,7 @@ let%expect_test "nested [choose_one]" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}];
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}];
   test [ "-foo"; "-baz" ];
   [%expect
     {|
@@ -316,7 +316,7 @@ let%expect_test "nested [choose_one]" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}];
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}];
   test [ "-foo" ];
   [%expect {| (arg (Foo_bar (true false))) |}];
   test [ "-bar" ];
@@ -349,7 +349,7 @@ let%expect_test "parse error with subcommand" =
 
       exe subcommand -help
 
-    (raised (command.ml.Exit_called (status 1))) |}];
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}];
   test [ "-foo" ];
   [%expect
     {|
@@ -361,7 +361,7 @@ let%expect_test "parse error with subcommand" =
 
       exe subcommand -help
 
-    (raised (command.ml.Exit_called (status 1))) |}]
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}]
 ;;
 
 let%test_unit _ =
@@ -403,7 +403,7 @@ let%expect_test "choose_one strings" =
     {|
     (Error
      ("For simplicity, [Command.Spec.choose_one] does not support names with commas."
-      (-b,c) *)) (glob) |}];
+      (-b,c) core_kernel.v0.14.2/src/command.ml:1406:20)) |}];
   print_string
     (to_string
        (map2 ~f:Tuple2.create (anon ("FOO" %: string)) (flag "-a" no_arg ~doc:"")));
@@ -470,7 +470,7 @@ let%expect_test "[?verbose_on_parse_error]" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}];
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}];
   test ~verbose_on_parse_error:true ();
   [%expect
     {|
@@ -482,11 +482,11 @@ let%expect_test "[?verbose_on_parse_error]" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}];
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}];
   test ~verbose_on_parse_error:false ();
   [%expect {|
     Fail!
-    (raised (command.ml.Exit_called (status 1))) |}]
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}]
 ;;
 
 let%expect_test "illegal flag names" =
@@ -541,7 +541,7 @@ let%expect_test "escape flag type" =
       [-help]                     print this help text and exit
                                   (alias: -?)
 
-    (command.ml.Exit_called (status 0)) |}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0)) |}];
   test [];
   [%expect
     {|
@@ -651,16 +651,16 @@ let%expect_test "double-dash built-in flags" =
       version  print version information
       help     explain a given subcommand (perhaps recursively)
 
-    (command.ml.Exit_called (status 0)) |}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0)) |}];
   run_with_both_flags [] "build-info";
   [%expect
     {|
     ((username"")(hostname"")(kernel"")(build_time(1969-12-31 19:00:00.000000-05:00) ...
-    (command.ml.Exit_called (status 0)) |}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0)) |}];
   run_with_both_flags [] "version";
   [%expect {|
     NO_VERSION_UTIL
-    (command.ml.Exit_called (status 0)) |}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0)) |}];
   run_with_both_flags [ "blue" ] "help";
   [%expect
     {|
@@ -671,7 +671,7 @@ let%expect_test "double-dash built-in flags" =
       bird
       help  explain a given subcommand (perhaps recursively)
 
-    (command.ml.Exit_called (status 0))|}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0))|}];
   run_with_both_flags [ "blue"; "bird" ] "help";
   [%expect
     {|
@@ -682,7 +682,7 @@ let%expect_test "double-dash built-in flags" =
       [-help]  print this help text and exit
                (alias: -?)
 
-    (command.ml.Exit_called (status 0))|}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0))|}];
   run_test_command [ "blue"; "bird" ] |> print_string;
   [%expect {| hello world |}];
   run_test_command [ "blue"; "bird"; "--" ] |> print_string;
@@ -696,7 +696,7 @@ let%expect_test "double-dash built-in flags" =
 
       __exe_name__ blue bird -help
 
-    (raised (command.ml.Exit_called (status 1))) |}]
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}]
 ;;
 
 let%expect_test "when_parsing_succeeds" =
@@ -729,7 +729,7 @@ let%expect_test "when_parsing_succeeds" =
       [-help]        print this help text and exit
                      (alias: -?)
 
-    (command.ml.Exit_called (status 0)) |}];
+    (core_kernel.v0.14.2/src/command.ml.Exit_called (status 0)) |}];
   run [];
   [%expect
     {|
@@ -741,5 +741,5 @@ let%expect_test "when_parsing_succeeds" =
 
       __exe_name__ -help
 
-    (raised (command.ml.Exit_called (status 1))) |}]
+    (raised (core_kernel.v0.14.2/src/command.ml.Exit_called (status 1))) |}]
 ;;

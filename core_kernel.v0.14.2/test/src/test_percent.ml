@@ -165,6 +165,7 @@ let%expect_test "generator" =
   [%expect {| |}]
 ;;
 
+(*
 let%expect_test ("to_mult and of_mult no boxing in arrays"[@tags "fast-flambda"]) =
   let float_arr = Array.init 1 ~f:(fun i -> Float.of_int i) in
   let percent_arr = Array.create ~len:1 Percent.zero in
@@ -172,6 +173,7 @@ let%expect_test ("to_mult and of_mult no boxing in arrays"[@tags "fast-flambda"]
     percent_arr.(0) <- Percent.of_mult float_arr.(0);
     float_arr.(0) <- Percent.to_mult percent_arr.(0))
 ;;
+   *)
 
 let%test "Percent.Option cannot represent nan" =
   let nan = Percent.of_mult Float.nan in
