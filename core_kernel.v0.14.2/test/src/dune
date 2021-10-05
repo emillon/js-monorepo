@@ -3,6 +3,7 @@
  (libraries base_test_helpers core_kernel expect_test_helpers_core fheap)
  (preprocessor_deps
   ../../src/config.h
+  sample_time_zone_file
   (env_var TESTING_FRAMEWORK))
  (preprocess
   (pps ppx_jane))
