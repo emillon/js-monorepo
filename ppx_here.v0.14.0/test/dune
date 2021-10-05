@@ -1,4 +1,4 @@
-(alias (name runtest) (deps dummy.ml.pp)
+(alias (name runtest) (enabled_if false) (deps dummy.ml.pp)
  (action (bash "grep -q '\"ppx/ppx_here/test/dummy.mll\"' dummy.ml.pp")))
 
 (alias (name DEFAULT) (deps dummy.ml.pp))
