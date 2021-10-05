@@ -1,4 +1,4 @@
 (executables (names main) (libraries expect_test_disabling_test_lib)
  (preprocess (pps ppx_jane)))
 
-(alias (name runtest) (deps ./main.exe) (action (bash %{deps})))
+(alias (name runtest) (deps ./main.exe) (action (run %{deps})))

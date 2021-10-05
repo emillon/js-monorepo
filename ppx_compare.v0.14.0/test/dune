@@ -4,6 +4,7 @@
 (alias (name DEFAULT) (deps test.ml.pp))
 
 (alias (name runtest) (deps comparelib_test__Check_optims.o)
+ (enabled_if false)
  (action
   (bash
    "objdump -t comparelib_test__Check_optims.o | { ! grep -Eq 'caml_(compare|equal)'; }")))
