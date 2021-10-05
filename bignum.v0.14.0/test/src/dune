@@ -1,0 +1,4 @@
+(library (name bignum_test)
+ (libraries bigint bignum core_kernel expect_test_helpers_core zarith)
+ (preprocess (pps ppx_jane))
+ (inline_tests))

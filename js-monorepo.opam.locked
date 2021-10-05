@@ -6,7 +6,6 @@ depends: [
   "base-bytes" {= "base"}
   "base-threads" {= "base"}
   "base-unix" {= "base"}
-  "bignum" {= "v0.14.0"}
   "conf-g++" {= "1.0"}
   "conf-gmp" {= "3"}
   "conf-libpcre" {= "1"}
@@ -96,10 +95,6 @@ depexts: [
   ["system:pkgconf"] {os = "win32" & os-distribution = "cygwinports"}
 ]
 pin-depends: [
-  [
-    "bignum.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/bignum-v0.14.0.tar.gz"
-  ]
   [
     "core_bench.v0.14.0"
     "https://ocaml.janestreet.com/ocaml-core/v0.14/files/core_bench-v0.14.0.tar.gz"
@@ -328,11 +323,6 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/bignum-v0.14.0.tar.gz"
-    "bignum"
-    ["md5=d97af8dc866db3eda78b1edc6c0982bf"]
-  ]
-  [
     "https://ocaml.janestreet.com/ocaml-core/v0.14/files/core_bench-v0.14.0.tar.gz"
     "core_bench"
     ["md5=96c9241f978acbc3a6817b20b281996f"]
@@ -369,6 +359,7 @@ x-opam-monorepo-duniverse-dirs: [
   ]
 ]
 x-opam-monorepo-root-packages: [
+  "afl-persistent"
   "async"
   "async_kernel"
   "async_rpc_kernel"
@@ -377,10 +368,12 @@ x-opam-monorepo-root-packages: [
   "base_bigstring"
   "base_quickcheck"
   "base_test_helpers"
+  "bignum"
   "bin_prot"
   "core"
   "core_kernel"
   "fieldslib"
+  "iobuf_test"
   "jane-street-headers"
   "js-monorepo"
   "jst-config"

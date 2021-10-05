@@ -1,0 +1,3 @@
+(library (name bignum_benchmarks) (libraries bignum core)
+ (preprocess (pps ppx_jane))
+ (inline_tests))
