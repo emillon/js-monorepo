@@ -37,7 +37,7 @@
   (alias_rec ppx_optcomp.v0.14.3/all)
   (alias_rec ppx_optional.v0.14.0/all)
   (alias_rec ppx_pipebang.v0.14.0/all)
-;  (alias_rec ppx_sexp_conv.v0.14.3/all)
+  (alias_rec ppx_sexp_conv.v0.14.3/all)
   (alias_rec ppx_sexp_message.v0.14.1/all)
   (alias_rec ppx_sexp_value.v0.14.0/all)
   (alias_rec ppx_stable.v0.14.1/all)

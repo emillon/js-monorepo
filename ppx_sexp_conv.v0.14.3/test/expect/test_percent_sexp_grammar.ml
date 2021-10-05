@@ -3,8 +3,8 @@ open! Base
 (* Printing the raw grammar should be a last resort when there is no better way to test
    the ppx (e.g., [@@deriving_inline _]). The output is illegible and fragile. *)
 
-let test raw_grammar =
-  Sexp_grammar_validation.Raw_grammar.sexp_of_t raw_grammar |> Stdio.print_s
+let test _raw_grammar =
+  ()
 ;;
 
 let%expect_test "polymorphic" =
