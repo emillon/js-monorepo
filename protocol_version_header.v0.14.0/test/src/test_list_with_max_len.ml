@@ -32,5 +32,5 @@ let%expect_test "we can read regular lists sent over the wire and fail when we a
       {|
           (exn
            (exn.ml.Reraised Context
-            (common.ml.Read_error "List_too_long / 2 (max 1)" 1)))|}]
+            (bin_prot.v0.14.0/src/common.ml.Read_error "List_too_long / 2 (max 1)" 1)))|}]
 ;;

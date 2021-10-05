@@ -23,16 +23,16 @@ let%expect_test _ =
   [%expect {| (foo 42 1 (blah 0)) |}];
 
   pr [%message "foo" [%here]];
-  [%expect {| (foo */test.ml:*:*) (glob) |}];
+  [%expect {| (foo ppx_sexp_message.v0.14.1/test/test.ml:25:21) |}];
 
   pr [%message "foo" ~loc:[%here]];
-  [%expect {| (foo (loc */test.ml:*:*)) (glob) |}];
+  [%expect {| (foo (loc ppx_sexp_message.v0.14.1/test/test.ml:28:26)) |}];
 
   pr [%message "foo" ~_:[%here]];
-  [%expect {| (foo */test.ml:*:*) (glob) |}];
+  [%expect {| (foo ppx_sexp_message.v0.14.1/test/test.ml:31:24) |}];
 
   pr [%message [%here] "blah"];
-  [%expect " (*/test.ml:*:* blah) (glob) "];
+  [%expect " (ppx_sexp_message.v0.14.1/test/test.ml:34:15 blah) "];
 
   pr [%message (sprintf "foo %d" x) (y : string)];
   [%expect {| ("foo 42" (y forty-two)) |}];
@@ -50,7 +50,7 @@ let%expect_test _ =
   [%expect {| a |}];
 
   pr [%message [%here]];
-  [%expect {| */test.ml:*:* (glob) |}];
+  [%expect {| ppx_sexp_message.v0.14.1/test/test.ml:52:15 |}];
 
   pr [%message (x : int)];
   [%expect {| (x 42) |}];

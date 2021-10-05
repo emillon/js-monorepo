@@ -61,7 +61,7 @@ module Records = struct
     [%expect {|
       (raised (
         Of_sexp_error
-        "ppx_sexp_test.ml.Records.t_of_sexp: record conversion: only pairs expected, their first element must be an atom"
+        "ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Records.t_of_sexp: record conversion: only pairs expected, their first element must be an atom"
         (invalid_sexp ((a) (b ()))))) |}]
 
   let%expect_test _ =
@@ -70,7 +70,7 @@ module Records = struct
     [%expect {|
       (raised (
         Of_sexp_error
-        "ppx_sexp_test.ml.Records.t_of_sexp: duplicate fields: a"
+        "ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Records.t_of_sexp: duplicate fields: a"
         (invalid_sexp ((a 1) (a))))) |}]
 
 
@@ -80,7 +80,7 @@ module Records = struct
     [%expect {|
       (raised (
         Of_sexp_error
-        "ppx_sexp_test.ml.Records.t_of_sexp: record conversion: only pairs expected, their first element must be an atom"
+        "ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Records.t_of_sexp: record conversion: only pairs expected, their first element must be an atom"
         (invalid_sexp (a 3 4)))) |}]
 
   let%expect_test _ =
@@ -89,7 +89,7 @@ module Records = struct
     [%expect {|
       (raised (
         Of_sexp_error
-        "ppx_sexp_test.ml.Records.t_of_sexp: extra fields: c"
+        "ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Records.t_of_sexp: extra fields: c"
         (invalid_sexp ((c 3))))) |}]
 
 end
@@ -136,19 +136,20 @@ end = struct
   exception E2 of string * int [@@deriving sexp]
   exception E_tuple of (string * int) [@@deriving sexp]
   exception E_record of {a:string; b:int} [@@deriving sexp]
-  let%test_unit _ =
-    let cases =
-      [ E0, "ppx_sexp_test.ml.Exceptions.E0"
-      ; E1 "a", "(ppx_sexp_test.ml.Exceptions.E1 a)"
-      ; E2 ("b", 2), "(ppx_sexp_test.ml.Exceptions.E2 b 2)"
-      ; E_tuple ("c", 3), "(ppx_sexp_test.ml.Exceptions.E_tuple(c 3))"
-      ; E_record {a="c"; b= 3}, "(ppx_sexp_test.ml.Exceptions.E_record(a c)(b 3))"
-      ]
-    in
-    List.iter (fun (exn, sexp_as_str) ->
-      let sexp = Sexplib.Sexp.of_string sexp_as_str in
-      assert ([%sexp_of: exn] exn = sexp);
-    ) cases
+  let test exn =
+    Stdio.print_s ([%sexp_of: exn] exn)
+
+  let%expect_test _ =
+    test E0;
+    [%expect{| ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Exceptions.E0 |}];
+    test (E1 "a");
+    [%expect{| (ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Exceptions.E1 a) |}];
+    test (E2 ("b", 2));
+    [%expect{| (ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Exceptions.E2 b 2) |}];
+    test (E_tuple ("c", 3));
+    [%expect{| (ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Exceptions.E_tuple (c 3)) |}];
+    test (E_record {a="c"; b= 3});
+    [%expect{| (ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Exceptions.E_record (a c) (b 3)) |}];
   ;;
 end
 
@@ -504,10 +505,14 @@ module True_and_false = struct
   let%test _ = False 2 = u_of_sexp (Sexplib.Sexp.of_string "(false 2)")
 
   exception True [@@deriving sexp]
-  let%test _ = "ppx_sexp_test.ml.True_and_false.True" = Sexp.to_string (sexp_of_exn True)
+  let%expect_test _ =
+    Stdio.print_s (sexp_of_exn True);
+    [%expect {| ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.True_and_false.True |}]
 
   exception False of int [@@deriving sexp]
-  let%test _ = "(ppx_sexp_test.ml.True_and_false.False 1)" = Sexp.to_string (sexp_of_exn (False 1))
+  let%expect_test _ =
+    Stdio.print_s (sexp_of_exn (False 1));
+    [%expect {| (ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.True_and_false.False 1) |}]
 
   type v = [ `True | `False of int ] [@@deriving sexp, sexp_grammar]
   let%test _ = Sexp.to_string (sexp_of_v `True) = "True"
@@ -687,7 +692,7 @@ module Boolean = struct
       );
     [%expect {|
       (Of_sexp_error
-       "ppx_sexp_test.ml.Boolean.t_allow_extra_fields_of_sexp: record conversion: a [sexp.bool] field was given a payload."
+       "ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Boolean.t_allow_extra_fields_of_sexp: record conversion: a [sexp.bool] field was given a payload."
        (invalid_sexp ((no_arg true)))) |}]
 
 end
@@ -831,7 +836,7 @@ module Allow_extra_fields = struct
         [%here] (fun () -> t2_of_sexp (Sexplib.Sexp.of_string "((a 1)(a))"));
       [%expect {|
         (Of_sexp_error
-         "ppx_sexp_test.ml.Allow_extra_fields.M1.t2_of_sexp: duplicate fields: a"
+         "ppx_sexp_conv.v0.14.3/test/ppx_sexp_test.ml.Allow_extra_fields.M1.t2_of_sexp: duplicate fields: a"
          (invalid_sexp ((a 1) (a)))) |}]
   end
   module M2 = struct

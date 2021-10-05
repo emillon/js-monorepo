@@ -1,4 +1,5 @@
 (library (name sexplib_ounit_tests)
  (libraries base base_quickcheck core_kernel.composition_infix
   expect_test_helpers_core sexplib)
- (preprocess (pps ppx_jane)))
+ (preprocess (pps ppx_jane))
+ (inline_tests))
