@@ -2,6 +2,7 @@
  (preprocess (pps ppx_jane)))
 
 (rule (targets tabs.ml) (deps (:first_dep tabs.ml.in) jbuild)
+ (enabled_if false)
  (action
   (bash
    "cp %{first_dep} %{targets}; %{bin:apply-style} -directory-config jbuild -in-place %{targets}")))

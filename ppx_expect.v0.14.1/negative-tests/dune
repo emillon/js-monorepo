@@ -2,6 +2,7 @@
  (preprocess (pps ppx_jane)))
 
 (rule
+ (enabled_if false)
  (deps (:first_dep ./inline_tests_runner) ./inline_tests_runner.exe
   (glob_files *.ml))
  (targets glob.ml.corrected exn.ml.corrected exn_missing.ml.corrected
