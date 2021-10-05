@@ -8,6 +8,9 @@ depends: [
   "qtest"
   "re2"
   "ounit2"
+  "shell"
+  "bignum"
+  "pcre"
   "odoc" {with-doc}
 ]
 build: [

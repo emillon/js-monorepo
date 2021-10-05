@@ -12,4 +12,7 @@
   core_bench
   qtest
   re2
-  ounit2))
+  ounit2
+  shell
+  bignum
+  pcre))

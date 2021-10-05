@@ -9,7 +9,7 @@
   (alias_rec base_bigstring.v0.14.0/all)
   (alias_rec base_quickcheck.v0.14.1/all)
   (alias_rec bin_prot.v0.14.0/all)
-;(alias_rec core.v0.14.1/all)
+  (alias_rec core.v0.14.1/all)
   (alias_rec core_kernel.v0.14.2/all)
   (alias_rec fieldslib.v0.14.0/all)
   (alias_rec jane-street-headers.v0.14.0/all)

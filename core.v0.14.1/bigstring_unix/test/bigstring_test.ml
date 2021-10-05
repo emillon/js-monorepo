@@ -190,7 +190,7 @@ let%expect_test "destruction" =
   Bigstring.unsafe_destroy bstr;
   "destroyed size" @? (Bigstring.length bstr = 0);
   "destroyed access" @? begin
-    try ignore (bstr.{0} = 'x' : bool); false
+    try[@warning "-52"] ignore (bstr.{0} = 'x' : bool); false
     with Invalid_argument "index out of bounds" -> true
   end;
   "double destroy" @? begin
