@@ -109,7 +109,7 @@
 ;inline_tests ok
   (alias_rec ppx_here.v0.14.0/runtest)
 ;inline_tests ok
-;(alias_rec ppx_inline_test.v0.14.1/runtest)
+  (alias_rec ppx_inline_test.v0.14.1/runtest)
 ;inline_tests ok
   (alias_rec ppx_jane.v0.14.0/runtest)
 ;inline_tests ok
