@@ -22,7 +22,7 @@
   (alias_rec ppx_bin_prot.v0.14.0/all)
   (alias_rec ppx_cold.v0.14.0/all)
   (alias_rec ppx_compare.v0.14.0/all)
-;  (alias_rec ppx_custom_printf.v0.14.1/all)
+  (alias_rec ppx_custom_printf.v0.14.1/all)
   (alias_rec ppx_enumerate.v0.14.0/all)
 ;  (alias_rec ppx_expect.v0.14.1/all)
   (alias_rec ppx_fields_conv.v0.14.2/all)
