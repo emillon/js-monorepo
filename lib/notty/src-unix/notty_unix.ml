@@ -1,6 +1,8 @@
 (* Copyright (c) 2016-2017 David Kaloper Meršinjak. All rights reserved.
    See LICENSE.md. *)
 
+[@@@ocaml.warning "-5"]
+
 open Notty
 
 external c_winsize : Unix.file_descr -> int = "caml_notty_winsize" [@@noalloc]
