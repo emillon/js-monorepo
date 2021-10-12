@@ -2,8 +2,6 @@
 
 (name js-monorepo)
 
-(formatting disabled)
-
 (generate_opam_files true)
 
 (package
