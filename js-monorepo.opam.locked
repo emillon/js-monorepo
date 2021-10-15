@@ -25,7 +25,6 @@ depends: [
   "ocamlfind" {= "1.8.1+dune"}
   "octavius" {= "1.2.2"}
   "ounit2" {= "2.2.4"}
-  "patience_diff" {= "v0.14.0"}
   "pcre" {= "7.5.0"}
   "ppx_derivers" {= "1.2.1"}
   "ppxlib" {= "0.22.2"}
@@ -120,10 +119,6 @@ pin-depends: [
   [
     "ounit2.2.2.4"
     "https://github.com/gildor478/ounit/releases/download/v2.2.4/ounit-v2.2.4.tbz"
-  ]
-  [
-    "patience_diff.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/patience_diff-v0.14.0.tar.gz"
   ]
   [
     "pcre.7.5.0"
@@ -292,11 +287,6 @@ x-opam-monorepo-duniverse-dirs: [
       "sha512=3edb8471b29c9eb2f6ba11b157abf7ca43ef965d4b1500aaaf1acaeb261972a61c9b104887ada6ca63dc85e06b1d27e34f391885b2fbeb7ea5646323d3be08d0"
     ]
   ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/patience_diff-v0.14.0.tar.gz"
-    "patience_diff"
-    ["md5=e04e7e9da45352706498f380e66b9f5e"]
-  ]
 ]
 x-opam-monorepo-root-packages: [
   "afl-persistent"
@@ -324,6 +314,7 @@ x-opam-monorepo-root-packages: [
   "ocaml_value_size"
   "parsexp"
   "patdiff"
+  "patience_diff"
   "ppx_assert"
   "ppx_base"
   "ppx_bench"
