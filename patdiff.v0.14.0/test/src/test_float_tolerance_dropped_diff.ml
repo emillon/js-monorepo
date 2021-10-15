@@ -4,6 +4,7 @@ open! Import
 
 (* Regression test for a case where we used to drop the first line of this diff. *)
 
+(*
 let prev = {|
 ((foo (1 2))
  (bar 0.5%))
@@ -53,3 +54,4 @@ let%expect_test "-float-tolerance 0x -no-semantic-cleanup" =
     (fg:black bg:yellow)!|(fg:red) (bar 0.5%)(off))
     ("Unclean exit" (Exit_non_zero 1)) |}]
 ;;
+*)

@@ -1,5 +1,7 @@
 open! Core
 open! Async
+
+(*
 open Import
 
 let patdiff ~prev ~next extra_flags =
@@ -80,3 +82,4 @@ let%expect_test "Show trailing whitespace" =
     (fg:black bg:green)+|(off)foo(fg:green +reverse)
     ("Unclean exit" (Exit_non_zero 1)) |}]
 ;;
+   *)

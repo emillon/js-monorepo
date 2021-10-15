@@ -6,6 +6,7 @@ open! Import
    of obvious mistakes, like silently changing the calling convention without updating the
    script. It does not cover all the code paths that git might exercise. *)
 
+(*
 let links =
   ("../../bin/patdiff-git-wrapper", `In_path_as, "patdiff-git-wrapper") :: links
 ;;
@@ -49,3 +50,4 @@ let%expect_test "patdiff-git-wrapper" =
       (fg:black bg:red)-|(off)foo(fg:red) bar(off) baz
       (fg:black bg:green)+|(off)foo baz(fg:green) quux |}])
 ;;
+*)

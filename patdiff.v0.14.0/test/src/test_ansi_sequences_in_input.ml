@@ -1,5 +1,7 @@
 open! Core
 open! Async
+
+(*
 open Import
 
 let aansi = "\027[0;1m\n"
@@ -31,3 +33,4 @@ let%expect_test "colored text" =
     (fg:black bg:green)+|(fg:blue)blue(off) text
     ("Unclean exit" (Exit_non_zero 1)) |}]
 ;;
+   *)

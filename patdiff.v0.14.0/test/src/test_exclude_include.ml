@@ -2,6 +2,7 @@ open! Core
 open! Async
 open! Import
 
+(*
 let test extra_flags =
   let filenames = [ "foo"; "bar"; "baz" ] in
   patdiff_dir
@@ -77,3 +78,4 @@ let%expect_test "patdiff -include -exclude" =
     +|next
     ("Unclean exit" (Exit_non_zero 1)) |}]
 ;;
+   *)

@@ -3,6 +3,7 @@ open! Async
 open! Import
 
 
+(*
 let prev =
   {|
     assert (
@@ -97,3 +98,4 @@ let%expect_test "with extra newlines" =
     (fg:black bg:yellow)!|(off)        (Hashtbl.length t.bucket_id_to_keys(fg:red))(off)))
     ("Unclean exit" (Exit_non_zero 1)) |}]
 ;;
+   *)

@@ -2,6 +2,8 @@ open! Core
 open! Async
 open! Import
 
+(*
+
 let%expect_test "message when non-ASCII text files differ" =
   let prev =
     {|┌Signals──┐┌Values───┐┌Waves─────────┐
@@ -45,3 +47,4 @@ let%expect_test "message when binary files differ" =
 
     ("Unclean exit" (Exit_non_zero 1)) |}]
 ;;
+   *)
