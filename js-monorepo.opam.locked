@@ -313,6 +313,8 @@ x-opam-monorepo-root-packages: [
   "ocaml-compiler-libs"
   "ocaml_value_size"
   "parsexp"
+  "patdiff"
+  "patience_diff"
   "ppx_assert"
   "ppx_base"
   "ppx_bench"
