@@ -10,12 +10,9 @@ depends: [
   "conf-gmp" {= "3"}
   "conf-libpcre" {= "1"}
   "conf-pkg-config" {= "2"}
-  "core_bench" {= "v0.14.0"}
   "csexp" {= "1.5.1"}
   "dune" {= "2.9.1"}
   "dune-configurator" {= "2.9.1"}
-  "expect_test_helpers_async" {= "v0.14.0"}
-  "expect_test_helpers_core" {= "v0.14.0"}
   "findlib" {= "1.8.1+dune"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
@@ -36,14 +33,10 @@ depends: [
   "qcheck-ounit" {= "0.18"}
   "qtest" {= "2.11.2"}
   "re" {= "1.10.3"}
-  "re2" {= "v0.14.0"}
   "result" {= "1.5"}
   "seq" {= "base+dune"}
-  "sexp_pretty" {= "v0.14.0"}
-  "shell" {= "v0.14.0"}
   "stdlib-shims" {= "0.3.0"}
   "zarith" {= "1.9.1+dune"}
-  "zarith_stubs_js" {= "v0.14.0"}
 ]
 depexts: [
   ["devel/pkgconf"] {os = "openbsd"}
@@ -96,24 +89,12 @@ depexts: [
 ]
 pin-depends: [
   [
-    "core_bench.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/core_bench-v0.14.0.tar.gz"
-  ]
-  [
     "csexp.1.5.1"
     "https://github.com/ocaml-dune/csexp/releases/download/1.5.1/csexp-1.5.1.tbz"
   ]
   [
     "dune-configurator.2.9.1"
     "https://github.com/ocaml/dune/releases/download/2.9.1/dune-2.9.1.tbz"
-  ]
-  [
-    "expect_test_helpers_async.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/expect_test_helpers_async-v0.14.0.tar.gz"
-  ]
-  [
-    "expect_test_helpers_core.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/expect_test_helpers_core-v0.14.0.tar.gz"
   ]
   [
     "findlib.1.8.1+dune"
@@ -168,22 +149,10 @@ pin-depends: [
     "https://github.com/ocaml/ocaml-re/releases/download/1.10.3/re-1.10.3.tbz"
   ]
   [
-    "re2.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/re2-v0.14.0.tar.gz"
-  ]
-  [
     "result.1.5"
     "https://github.com/janestreet/result/releases/download/1.5/result-1.5.tbz"
   ]
   ["seq.base+dune" "https://github.com/c-cube/seq/archive/0.2.2.tar.gz"]
-  [
-    "sexp_pretty.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/sexp_pretty-v0.14.0.tar.gz"
-  ]
-  [
-    "shell.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/shell-v0.14.0.tar.gz"
-  ]
   [
     "stdlib-shims.0.3.0"
     "https://github.com/ocaml/stdlib-shims/releases/download/0.3.0/stdlib-shims-0.3.0.tbz"
@@ -191,10 +160,6 @@ pin-depends: [
   [
     "zarith.1.9.1+dune"
     "https://github.com/dune-universe/Zarith/archive/v1.9.1+dune.tar.gz"
-  ]
-  [
-    "zarith_stubs_js.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/zarith_stubs_js-v0.14.0.tar.gz"
   ]
 ]
 x-opam-monorepo-duniverse-dirs: [
@@ -322,41 +287,6 @@ x-opam-monorepo-duniverse-dirs: [
       "sha512=3edb8471b29c9eb2f6ba11b157abf7ca43ef965d4b1500aaaf1acaeb261972a61c9b104887ada6ca63dc85e06b1d27e34f391885b2fbeb7ea5646323d3be08d0"
     ]
   ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/core_bench-v0.14.0.tar.gz"
-    "core_bench"
-    ["md5=96c9241f978acbc3a6817b20b281996f"]
-  ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/expect_test_helpers_async-v0.14.0.tar.gz"
-    "expect_test_helpers_async"
-    ["md5=fcf4a22a5a7e330d24644f5cc7e72f55"]
-  ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/expect_test_helpers_core-v0.14.0.tar.gz"
-    "expect_test_helpers_core"
-    ["md5=d1abf39007394165bedb119e9a7d7404"]
-  ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/re2-v0.14.0.tar.gz"
-    "re2"
-    ["md5=1ba423969e51a6a226d19f4cbb898719"]
-  ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/sexp_pretty-v0.14.0.tar.gz"
-    "sexp_pretty"
-    ["md5=032098e1eb1cf5885c3bcc43200a8e71"]
-  ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/shell-v0.14.0.tar.gz"
-    "shell"
-    ["md5=a91101aef477f2bd563c24f218ae0bd3"]
-  ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/zarith_stubs_js-v0.14.0.tar.gz"
-    "zarith_stubs_js"
-    ["md5=f7f0dcab17c5e630e2965d4550d649fe"]
-  ]
 ]
 x-opam-monorepo-root-packages: [
   "afl-persistent"
@@ -371,7 +301,10 @@ x-opam-monorepo-root-packages: [
   "bignum"
   "bin_prot"
   "core"
+  "core_bench"
   "core_kernel"
+  "expect_test_helpers_async"
+  "expect_test_helpers_core"
   "fieldslib"
   "iobuf_test"
   "jane-street-headers"
@@ -411,8 +344,11 @@ x-opam-monorepo-root-packages: [
   "protocol_version_header"
   "qtest_lib"
   "quickcheck_deprecated"
+  "re2"
+  "sexp_pretty"
   "sexplib"
   "sexplib0"
+  "shell"
   "spawn"
   "splittable_random"
   "stdio"
@@ -421,5 +357,6 @@ x-opam-monorepo-root-packages: [
   "timezone"
   "typerep"
   "variantslib"
+  "zarith_stubs_js"
 ]
 x-opam-monorepo-version: "0.2"

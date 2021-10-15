@@ -1,0 +1,4 @@
+(library (name string_extended_test)
+ (libraries core_kernel quickcheck_deprecated string_extended)
+ (preprocess (pps ppx_jane -allow-unannotated-ignores))
+ (inline_tests))

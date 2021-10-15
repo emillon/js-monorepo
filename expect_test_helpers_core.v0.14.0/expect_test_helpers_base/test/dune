@@ -1,0 +1,3 @@
+(library (name expect_test_helpers_base_test)
+ (libraries base expect_test_helpers_base stdio) (preprocess (pps ppx_jane))
+ (inline_tests))
