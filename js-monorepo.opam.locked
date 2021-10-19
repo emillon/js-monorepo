@@ -30,7 +30,6 @@ depends: [
   "octavius" {= "1.2.2"}
   "ounit2" {= "2.2.4"}
   "pcre" {= "7.5.0"}
-  "ppx_accessor" {= "v0.14.2"}
   "ppx_derivers" {= "1.2.1"}
   "ppxlib" {= "0.22.2"}
   "qcheck" {= "0.18"}
@@ -148,10 +147,6 @@ pin-depends: [
   [
     "pcre.7.5.0"
     "https://github.com/mmottl/pcre-ocaml/releases/download/7.5.0/pcre-7.5.0.tbz"
-  ]
-  [
-    "ppx_accessor.v0.14.2"
-    "https://github.com/janestreet/ppx_accessor/archive/v0.14.2.tar.gz"
   ]
   [
     "ppx_derivers.1.2.1"
@@ -290,11 +285,6 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
-    "https://github.com/janestreet/ppx_accessor/archive/v0.14.2.tar.gz"
-    "ppx_accessor"
-    ["md5=39f093590a7f684eb63e58655370a276"]
-  ]
-  [
     "https://github.com/janestreet/result/releases/download/1.5/result-1.5.tbz"
     "result"
     ["md5=1b82dec78849680b49ae9a8a365b831b"]
@@ -431,6 +421,7 @@ x-opam-monorepo-root-packages: [
   "parsexp"
   "patdiff"
   "patience_diff"
+  "ppx_accessor"
   "ppx_assert"
   "ppx_base"
   "ppx_bench"
