@@ -399,6 +399,7 @@ x-opam-monorepo-root-packages: [
   "bin_prot"
   "core"
   "core_bench"
+  "core_extended"
   "core_kernel"
   "expect_test_helpers_async"
   "expect_test_helpers_core"
