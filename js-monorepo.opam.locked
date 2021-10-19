@@ -16,7 +16,6 @@ depends: [
   "findlib" {= "1.8.1+dune"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
-  "notty" {= "0.2.2+dune"}
   "notty_async" {= "v0.14.0"}
   "num" {= "1.3+dune"}
   "ocaml" {= "4.12.1"}
@@ -106,10 +105,6 @@ pin-depends: [
   [
     "findlib.1.8.1+dune"
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
-  ]
-  [
-    "notty.0.2.2+dune"
-    "git+https://github.com/pqwy/notty#751b0b530391f3263bcee32f50737c69c2790dfc"
   ]
   [
     "notty_async.v0.14.0"
@@ -343,10 +338,6 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
-    "git+https://github.com/pqwy/notty#751b0b530391f3263bcee32f50737c69c2790dfc"
-    "notty"
-  ]
-  [
     "https://github.com/vincent-hugot/qtest/archive/v2.11.2.tar.gz"
     "qtest"
     [
@@ -389,6 +380,7 @@ x-opam-monorepo-root-packages: [
   "jane-street-headers"
   "js-monorepo"
   "jst-config"
+  "notty"
   "ocaml-compiler-libs"
   "ocaml_value_size"
   "parsexp"
