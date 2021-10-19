@@ -2,6 +2,8 @@ opam-version: "2.0"
 synopsis: "opam-monorepo generated lockfile"
 maintainer: "opam-monorepo"
 depends: [
+  "accessor" {= "v0.14.1"}
+  "accessor_base" {= "v0.14.1"}
   "base-bigarray" {= "base"}
   "base-bytes" {= "base"}
   "base-threads" {= "base"}
@@ -15,6 +17,7 @@ depends: [
   "dune" {= "2.9.1"}
   "dune-configurator" {= "2.9.1"}
   "findlib" {= "1.8.1+dune"}
+  "higher_kinded" {= "v0.14.1"}
   "lwt" {= "5.4.2"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
@@ -30,6 +33,7 @@ depends: [
   "octavius" {= "1.2.2"}
   "ounit2" {= "2.2.4"}
   "pcre" {= "7.5.0"}
+  "ppx_accessor" {= "v0.14.2"}
   "ppx_derivers" {= "1.2.1"}
   "ppxlib" {= "0.22.2"}
   "qcheck" {= "0.18"}
@@ -97,6 +101,14 @@ depexts: [
 ]
 pin-depends: [
   [
+    "accessor.v0.14.1"
+    "https://github.com/janestreet/accessor/archive/v0.14.1.tar.gz"
+  ]
+  [
+    "accessor_base.v0.14.1"
+    "https://github.com/janestreet/accessor_base/archive/v0.14.1.tar.gz"
+  ]
+  [
     "cppo.1.6.8"
     "https://github.com/ocaml-community/cppo/archive/v1.6.8.tar.gz"
   ]
@@ -111,6 +123,10 @@ pin-depends: [
   [
     "findlib.1.8.1+dune"
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
+  ]
+  [
+    "higher_kinded.v0.14.1"
+    "https://github.com/janestreet/higher_kinded/archive/v0.14.1.tar.gz"
   ]
   [
     "lwt.5.4.2"
@@ -147,6 +163,10 @@ pin-depends: [
   [
     "pcre.7.5.0"
     "https://github.com/mmottl/pcre-ocaml/releases/download/7.5.0/pcre-7.5.0.tbz"
+  ]
+  [
+    "ppx_accessor.v0.14.2"
+    "https://github.com/janestreet/ppx_accessor/archive/v0.14.2.tar.gz"
   ]
   [
     "ppx_derivers.1.2.1"
@@ -285,6 +305,26 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
+    "https://github.com/janestreet/accessor/archive/v0.14.1.tar.gz"
+    "accessor"
+    ["md5=feb57a6772e2d6fd9e7c51f246b5557e"]
+  ]
+  [
+    "https://github.com/janestreet/accessor_base/archive/v0.14.1.tar.gz"
+    "accessor_base"
+    ["md5=8a03b18c4ee5c47a832ea457eff67164"]
+  ]
+  [
+    "https://github.com/janestreet/higher_kinded/archive/v0.14.1.tar.gz"
+    "higher_kinded"
+    ["md5=6e1b0d3e2cc59bdafa9a65bf8df93727"]
+  ]
+  [
+    "https://github.com/janestreet/ppx_accessor/archive/v0.14.2.tar.gz"
+    "ppx_accessor"
+    ["md5=39f093590a7f684eb63e58655370a276"]
+  ]
+  [
     "https://github.com/janestreet/result/releases/download/1.5/result-1.5.tbz"
     "result"
     ["md5=1b82dec78849680b49ae9a8a365b831b"]
@@ -386,6 +426,7 @@ x-opam-monorepo-duniverse-dirs: [
   ]
 ]
 x-opam-monorepo-root-packages: [
+  "accessor_core"
   "afl-persistent"
   "async"
   "async_kernel"
