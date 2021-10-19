@@ -19,7 +19,6 @@ depends: [
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
   "mmap" {= "1.1.0"}
-  "notty_async" {= "v0.14.0"}
   "num" {= "1.3+dune"}
   "ocaml" {= "4.12.1"}
   "ocaml-base-compiler" {= "4.12.1"}
@@ -121,10 +120,6 @@ pin-depends: [
   [
     "mmap.1.1.0"
     "https://github.com/mirage/mmap/releases/download/v1.1.0/mmap-v1.1.0.tbz"
-  ]
-  [
-    "notty_async.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/notty_async-v0.14.0.tar.gz"
   ]
   [
     "num.1.3+dune"
@@ -395,11 +390,6 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/notty_async-v0.14.0.tar.gz"
-    "notty_async"
-    ["md5=ca7ab7750e950e4257149b679b8ba16f"]
-  ]
-  [
     "https://ocaml.janestreet.com/ocaml-core/v0.14/files/topological_sort-v0.14.0.tar.gz"
     "topological_sort"
     ["md5=56809cb506f8ddd14d7e18f8c29857cf"]
@@ -430,6 +420,7 @@ x-opam-monorepo-root-packages: [
   "js-monorepo"
   "jst-config"
   "notty"
+  "notty_async"
   "ocaml-compiler-libs"
   "ocaml_value_size"
   "parsexp"
