@@ -29,3 +29,6 @@ build: [
   ]
   ["dune" "install" "-p" name "--create-install-files" name]
 ]
+pin-depends: [
+[ "notty.0.2.2+dune" "git+https://github.com/pqwy/notty#751b0b530391f3263bcee32f50737c69c2790dfc"
+]]

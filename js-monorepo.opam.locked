@@ -16,6 +16,8 @@ depends: [
   "findlib" {= "1.8.1+dune"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
+  "notty" {= "0.2.2+dune"}
+  "notty_async" {= "v0.14.0"}
   "num" {= "1.3+dune"}
   "ocaml" {= "4.12.1"}
   "ocaml-base-compiler" {= "4.12.1"}
@@ -36,6 +38,11 @@ depends: [
   "result" {= "1.5"}
   "seq" {= "base+dune"}
   "stdlib-shims" {= "0.3.0"}
+  "topological_sort" {= "v0.14.0"}
+  "uchar" {= "0.0.2+dune"}
+  "uucp" {= "13.0.0+dune"}
+  "uuseg" {= "13.0.0+dune"}
+  "uutf" {= "1.0.2+dune"}
   "zarith" {= "1.9.1+dune"}
 ]
 depexts: [
@@ -101,6 +108,14 @@ pin-depends: [
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
   ]
   [
+    "notty.0.2.2+dune"
+    "git+https://github.com/pqwy/notty#751b0b530391f3263bcee32f50737c69c2790dfc"
+  ]
+  [
+    "notty_async.v0.14.0"
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/notty_async-v0.14.0.tar.gz"
+  ]
+  [
     "num.1.3+dune"
     "https://github.com/dune-universe/num/archive/v1.3+dune-2.tar.gz"
   ]
@@ -158,6 +173,26 @@ pin-depends: [
     "https://github.com/ocaml/stdlib-shims/releases/download/0.3.0/stdlib-shims-0.3.0.tbz"
   ]
   [
+    "topological_sort.v0.14.0"
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/topological_sort-v0.14.0.tar.gz"
+  ]
+  [
+    "uchar.0.0.2+dune"
+    "https://github.com/dune-universe/uchar/archive/v0.0.2+dune.tar.gz"
+  ]
+  [
+    "uucp.13.0.0+dune"
+    "https://github.com/dune-universe/uucp/archive/v13.0.0+dune.tar.gz"
+  ]
+  [
+    "uuseg.13.0.0+dune"
+    "https://github.com/dune-universe/uuseg/archive/v13.0.0+dune.tar.gz"
+  ]
+  [
+    "uutf.1.0.2+dune"
+    "https://github.com/dune-universe/uutf/archive/v1.0.2+dune.tar.gz"
+  ]
+  [
     "zarith.1.9.1+dune"
     "https://github.com/dune-universe/Zarith/archive/v1.9.1+dune.tar.gz"
   ]
@@ -198,6 +233,34 @@ x-opam-monorepo-duniverse-dirs: [
     "num"
     [
       "sha256=32156376be05260eb72f651ae33df41fe0af03ad322bee29a10495efadfb2d1d"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uchar/archive/v0.0.2+dune.tar.gz"
+    "uchar"
+    [
+      "sha256=ddd2dac470c4aa8e8d6163a2fceb82c4a7725693a0d92c5f4834bd4258e659dc"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uucp/archive/v13.0.0+dune.tar.gz"
+    "uucp"
+    [
+      "sha256=ea56f5d6d97dde8442c8678c6adda7b2a8353c22ac0486e8f9f434eb8923591f"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uuseg/archive/v13.0.0+dune.tar.gz"
+    "uuseg"
+    [
+      "sha256=cba1bec0e38ce727671713a6b341502b899e71fe6849460c87d3548c7ec52399"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uutf/archive/v1.0.2+dune.tar.gz"
+    "uutf"
+    [
+      "sha256=c7e272d513afacd8d9a790b63a11db9d0db09265d599fd52c7fdb7497920ed76"
     ]
   ]
   [
@@ -280,12 +343,26 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
+    "git+https://github.com/pqwy/notty#751b0b530391f3263bcee32f50737c69c2790dfc"
+    "notty"
+  ]
+  [
     "https://github.com/vincent-hugot/qtest/archive/v2.11.2.tar.gz"
     "qtest"
     [
       "md5=73b6f3f885cb8a404f491c6ab50aa373"
       "sha512=3edb8471b29c9eb2f6ba11b157abf7ca43ef965d4b1500aaaf1acaeb261972a61c9b104887ada6ca63dc85e06b1d27e34f391885b2fbeb7ea5646323d3be08d0"
     ]
+  ]
+  [
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/notty_async-v0.14.0.tar.gz"
+    "notty_async"
+    ["md5=ca7ab7750e950e4257149b679b8ba16f"]
+  ]
+  [
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/topological_sort-v0.14.0.tar.gz"
+    "topological_sort"
+    ["md5=56809cb506f8ddd14d7e18f8c29857cf"]
   ]
 ]
 x-opam-monorepo-root-packages: [
@@ -306,6 +383,8 @@ x-opam-monorepo-root-packages: [
   "expect_test_helpers_async"
   "expect_test_helpers_core"
   "fieldslib"
+  "hardcaml"
+  "hardcaml_waveterm"
   "iobuf_test"
   "jane-street-headers"
   "js-monorepo"
@@ -322,6 +401,7 @@ x-opam-monorepo-root-packages: [
   "ppx_cold"
   "ppx_compare"
   "ppx_custom_printf"
+  "ppx_deriving_hardcaml"
   "ppx_enumerate"
   "ppx_expect"
   "ppx_fields_conv"

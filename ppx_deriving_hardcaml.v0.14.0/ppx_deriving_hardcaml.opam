@@ -1,0 +1,32 @@
+opam-version: "2.0"
+name: "ppx_deriving_hardcaml"
+version: "v0.14.0"
+synopsis: "Rewrite OCaml records for use as Hardcaml Interfaces"
+description: """\
+An interface in Hardcaml is an OCaml record with special attributes including
+a bit width and RTL netlist name.  Input and output ports of a hardware design
+can then be accessed through the OCaml record.  This allows easier management
+of bundles of ports when working with the Simulator, Netlist generation or
+hierarchical designs."""
+maintainer: "Jane Street developers"
+authors: "Jane Street Group, LLC"
+license: "MIT"
+homepage: "https://github.com/janestreet/ppx_deriving_hardcaml"
+doc:
+  "https://ocaml.janestreet.com/ocaml-core/latest/doc/ppx_deriving_hardcaml/index.html"
+bug-reports: "https://github.com/janestreet/ppx_deriving_hardcaml/issues"
+depends: [
+  "ocaml" {>= "4.07.0"}
+  "base" {>= "v0.14" & < "v0.15"}
+  "hardcaml" {>= "v0.14" & < "v0.15"}
+  "ppx_jane" {>= "v0.14" & < "v0.15"}
+  "dune" {>= "2.0.0"}
+  "ppxlib" {>= "0.11.0"}
+]
+build: ["dune" "build" "-p" name "-j" jobs]
+dev-repo: "git+https://github.com/janestreet/ppx_deriving_hardcaml.git"
+url {
+  src:
+    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/ppx_deriving_hardcaml-v0.14.0.tar.gz"
+  checksum: "md5=4a5506ce911a12c9666b53a9d8168357"
+}
