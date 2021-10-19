@@ -10,12 +10,15 @@ depends: [
   "conf-gmp" {= "3"}
   "conf-libpcre" {= "1"}
   "conf-pkg-config" {= "2"}
+  "cppo" {= "1.6.8"}
   "csexp" {= "1.5.1"}
   "dune" {= "2.9.1"}
   "dune-configurator" {= "2.9.1"}
   "findlib" {= "1.8.1+dune"}
+  "lwt" {= "5.4.2"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
+  "mmap" {= "1.1.0"}
   "num" {= "1.3+dune"}
   "ocaml" {= "4.12.1"}
   "ocaml-base-compiler" {= "4.12.1"}
@@ -23,6 +26,7 @@ depends: [
   "ocaml-migrate-parsetree" {= "2.2.0"}
   "ocaml-options-vanilla" {= "1"}
   "ocamlfind" {= "1.8.1+dune"}
+  "ocplib-endian" {= "1.1"}
   "octavius" {= "1.2.2"}
   "ounit2" {= "2.2.4"}
   "pcre" {= "7.5.0"}
@@ -36,6 +40,10 @@ depends: [
   "result" {= "1.5"}
   "seq" {= "base+dune"}
   "stdlib-shims" {= "0.3.0"}
+  "uchar" {= "0.0.2+dune"}
+  "uucp" {= "13.0.0+dune"}
+  "uuseg" {= "13.0.0+dune"}
+  "uutf" {= "1.0.2+dune"}
   "zarith" {= "1.9.1+dune"}
 ]
 depexts: [
@@ -89,6 +97,10 @@ depexts: [
 ]
 pin-depends: [
   [
+    "cppo.1.6.8"
+    "https://github.com/ocaml-community/cppo/archive/v1.6.8.tar.gz"
+  ]
+  [
     "csexp.1.5.1"
     "https://github.com/ocaml-dune/csexp/releases/download/1.5.1/csexp-1.5.1.tbz"
   ]
@@ -101,6 +113,14 @@ pin-depends: [
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
   ]
   [
+    "lwt.5.4.2"
+    "https://github.com/ocsigen/lwt/archive/refs/tags/5.4.2.tar.gz"
+  ]
+  [
+    "mmap.1.1.0"
+    "https://github.com/mirage/mmap/releases/download/v1.1.0/mmap-v1.1.0.tbz"
+  ]
+  [
     "num.1.3+dune"
     "https://github.com/dune-universe/num/archive/v1.3+dune-2.tar.gz"
   ]
@@ -111,6 +131,10 @@ pin-depends: [
   [
     "ocamlfind.1.8.1+dune"
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
+  ]
+  [
+    "ocplib-endian.1.1"
+    "https://github.com/OCamlPro/ocplib-endian/archive/1.1.tar.gz"
   ]
   [
     "octavius.1.2.2"
@@ -158,11 +182,35 @@ pin-depends: [
     "https://github.com/ocaml/stdlib-shims/releases/download/0.3.0/stdlib-shims-0.3.0.tbz"
   ]
   [
+    "uchar.0.0.2+dune"
+    "https://github.com/dune-universe/uchar/archive/v0.0.2+dune.tar.gz"
+  ]
+  [
+    "uucp.13.0.0+dune"
+    "https://github.com/dune-universe/uucp/archive/v13.0.0+dune.tar.gz"
+  ]
+  [
+    "uuseg.13.0.0+dune"
+    "https://github.com/dune-universe/uuseg/archive/v13.0.0+dune.tar.gz"
+  ]
+  [
+    "uutf.1.0.2+dune"
+    "https://github.com/dune-universe/uutf/archive/v1.0.2+dune.tar.gz"
+  ]
+  [
     "zarith.1.9.1+dune"
     "https://github.com/dune-universe/Zarith/archive/v1.9.1+dune.tar.gz"
   ]
 ]
 x-opam-monorepo-duniverse-dirs: [
+  [
+    "https://github.com/OCamlPro/ocplib-endian/archive/1.1.tar.gz"
+    "ocplib-endian"
+    [
+      "md5=dedf4d69c1b87b3c6c7234f632399285"
+      "sha512=39351c666d1394770696fa89ac62f7c137ad1697d99888bfba2cc8de2c61df05dd8b3aa327c117bf38f3e29e081026d2c575c5ad0022bde92b3d43aba577d3f9"
+    ]
+  ]
   [
     "https://github.com/c-cube/qcheck/archive/v0.18.tar.gz"
     "qcheck"
@@ -201,6 +249,34 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
+    "https://github.com/dune-universe/uchar/archive/v0.0.2+dune.tar.gz"
+    "uchar"
+    [
+      "sha256=ddd2dac470c4aa8e8d6163a2fceb82c4a7725693a0d92c5f4834bd4258e659dc"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uucp/archive/v13.0.0+dune.tar.gz"
+    "uucp"
+    [
+      "sha256=ea56f5d6d97dde8442c8678c6adda7b2a8353c22ac0486e8f9f434eb8923591f"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uuseg/archive/v13.0.0+dune.tar.gz"
+    "uuseg"
+    [
+      "sha256=cba1bec0e38ce727671713a6b341502b899e71fe6849460c87d3548c7ec52399"
+    ]
+  ]
+  [
+    "https://github.com/dune-universe/uutf/archive/v1.0.2+dune.tar.gz"
+    "uutf"
+    [
+      "sha256=c7e272d513afacd8d9a790b63a11db9d0db09265d599fd52c7fdb7497920ed76"
+    ]
+  ]
+  [
     "https://github.com/gildor478/ounit/releases/download/v2.2.4/ounit-v2.2.4.tbz"
     "ounit"
     [
@@ -214,11 +290,24 @@ x-opam-monorepo-duniverse-dirs: [
     ["md5=1b82dec78849680b49ae9a8a365b831b"]
   ]
   [
+    "https://github.com/mirage/mmap/releases/download/v1.1.0/mmap-v1.1.0.tbz"
+    "mmap"
+    ["md5=8c5d5fbc537296dc525867535fb878ba"]
+  ]
+  [
     "https://github.com/mmottl/pcre-ocaml/releases/download/7.5.0/pcre-7.5.0.tbz"
     "pcre-ocaml"
     [
       "sha256=671142f40b6d86171cbc067253faadf903019161d57488bd0fb6c5456c2cbd1a"
       "sha512=be60f13ddb6bbfe20e30ca5d92434d85e1d1371479e1e2c725588af83fcc9366ed0435021b6a800c20336ac521f2134c767420136438684656a44ac1f9924be4"
+    ]
+  ]
+  [
+    "https://github.com/ocaml-community/cppo/archive/v1.6.8.tar.gz"
+    "cppo"
+    [
+      "md5=fed401197d86f9089e89f6cbdf1d660d"
+      "sha512=069bbe0ef09c03b0dc4b5795f909c3ef872fe99c6f1e6704a0fa97594b1570b3579226ec67fe11d696ccc349a4585055bbaf07c65eff423aa45af28abf38c858"
     ]
   ]
   [
@@ -280,6 +369,14 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
+    "https://github.com/ocsigen/lwt/archive/refs/tags/5.4.2.tar.gz"
+    "lwt"
+    [
+      "md5=ba3659a8918d8e7cb0f4ef9a83945f90"
+      "sha512=9f46fb2e56dc7bd57a12d5ab4dc68719947a1462f336087a95e991d087bb9b5b8dee2592d0f7d35abc507d9a641dd221c44c949c81d00e26c673a067d94ba3f4"
+    ]
+  ]
+  [
     "https://github.com/vincent-hugot/qtest/archive/v2.11.2.tar.gz"
     "qtest"
     [
@@ -306,10 +403,14 @@ x-opam-monorepo-root-packages: [
   "expect_test_helpers_async"
   "expect_test_helpers_core"
   "fieldslib"
+  "hardcaml"
+  "hardcaml_waveterm"
   "iobuf_test"
   "jane-street-headers"
   "js-monorepo"
   "jst-config"
+  "notty"
+  "notty_async"
   "ocaml-compiler-libs"
   "ocaml_value_size"
   "parsexp"
@@ -322,6 +423,7 @@ x-opam-monorepo-root-packages: [
   "ppx_cold"
   "ppx_compare"
   "ppx_custom_printf"
+  "ppx_deriving_hardcaml"
   "ppx_enumerate"
   "ppx_expect"
   "ppx_fields_conv"
@@ -357,6 +459,7 @@ x-opam-monorepo-root-packages: [
   "textutils"
   "time_now"
   "timezone"
+  "topological_sort"
   "typerep"
   "variantslib"
   "zarith_stubs_js"
