@@ -15,7 +15,6 @@ depends: [
   "dune" {= "2.9.1"}
   "dune-configurator" {= "2.9.1"}
   "findlib" {= "1.8.1+dune"}
-  "higher_kinded" {= "v0.14.1"}
   "lwt" {= "5.4.2"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
@@ -113,10 +112,6 @@ pin-depends: [
   [
     "findlib.1.8.1+dune"
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
-  ]
-  [
-    "higher_kinded.v0.14.1"
-    "https://github.com/janestreet/higher_kinded/archive/v0.14.1.tar.gz"
   ]
   [
     "lwt.5.4.2"
@@ -295,11 +290,6 @@ x-opam-monorepo-duniverse-dirs: [
     ]
   ]
   [
-    "https://github.com/janestreet/higher_kinded/archive/v0.14.1.tar.gz"
-    "higher_kinded"
-    ["md5=6e1b0d3e2cc59bdafa9a65bf8df93727"]
-  ]
-  [
     "https://github.com/janestreet/ppx_accessor/archive/v0.14.2.tar.gz"
     "ppx_accessor"
     ["md5=39f093590a7f684eb63e58655370a276"]
@@ -429,6 +419,7 @@ x-opam-monorepo-root-packages: [
   "fieldslib"
   "hardcaml"
   "hardcaml_waveterm"
+  "higher_kinded"
   "iobuf_test"
   "jane-street-headers"
   "js-monorepo"
