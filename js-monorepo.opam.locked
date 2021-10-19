@@ -40,7 +40,6 @@ depends: [
   "result" {= "1.5"}
   "seq" {= "base+dune"}
   "stdlib-shims" {= "0.3.0"}
-  "topological_sort" {= "v0.14.0"}
   "uchar" {= "0.0.2+dune"}
   "uucp" {= "13.0.0+dune"}
   "uuseg" {= "13.0.0+dune"}
@@ -181,10 +180,6 @@ pin-depends: [
   [
     "stdlib-shims.0.3.0"
     "https://github.com/ocaml/stdlib-shims/releases/download/0.3.0/stdlib-shims-0.3.0.tbz"
-  ]
-  [
-    "topological_sort.v0.14.0"
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/topological_sort-v0.14.0.tar.gz"
   ]
   [
     "uchar.0.0.2+dune"
@@ -389,11 +384,6 @@ x-opam-monorepo-duniverse-dirs: [
       "sha512=3edb8471b29c9eb2f6ba11b157abf7ca43ef965d4b1500aaaf1acaeb261972a61c9b104887ada6ca63dc85e06b1d27e34f391885b2fbeb7ea5646323d3be08d0"
     ]
   ]
-  [
-    "https://ocaml.janestreet.com/ocaml-core/v0.14/files/topological_sort-v0.14.0.tar.gz"
-    "topological_sort"
-    ["md5=56809cb506f8ddd14d7e18f8c29857cf"]
-  ]
 ]
 x-opam-monorepo-root-packages: [
   "afl-persistent"
@@ -469,6 +459,7 @@ x-opam-monorepo-root-packages: [
   "textutils"
   "time_now"
   "timezone"
+  "topological_sort"
   "typerep"
   "variantslib"
   "zarith_stubs_js"
