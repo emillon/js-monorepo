@@ -15,4 +15,5 @@
   ounit2
   shell
   bignum
-  pcre))
+  pcre
+  lwt))

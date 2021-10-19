@@ -10,12 +10,15 @@ depends: [
   "conf-gmp" {= "3"}
   "conf-libpcre" {= "1"}
   "conf-pkg-config" {= "2"}
+  "cppo" {= "1.6.8"}
   "csexp" {= "1.5.1"}
   "dune" {= "2.9.1"}
   "dune-configurator" {= "2.9.1"}
   "findlib" {= "1.8.1+dune"}
+  "lwt" {= "5.4.2"}
   "mirage-no-solo5" {= "1"}
   "mirage-no-xen" {= "1"}
+  "mmap" {= "1.1.0"}
   "notty_async" {= "v0.14.0"}
   "num" {= "1.3+dune"}
   "ocaml" {= "4.12.1"}
@@ -24,6 +27,7 @@ depends: [
   "ocaml-migrate-parsetree" {= "2.2.0"}
   "ocaml-options-vanilla" {= "1"}
   "ocamlfind" {= "1.8.1+dune"}
+  "ocplib-endian" {= "1.1"}
   "octavius" {= "1.2.2"}
   "ounit2" {= "2.2.4"}
   "pcre" {= "7.5.0"}
@@ -95,6 +99,10 @@ depexts: [
 ]
 pin-depends: [
   [
+    "cppo.1.6.8"
+    "https://github.com/ocaml-community/cppo/archive/v1.6.8.tar.gz"
+  ]
+  [
     "csexp.1.5.1"
     "https://github.com/ocaml-dune/csexp/releases/download/1.5.1/csexp-1.5.1.tbz"
   ]
@@ -105,6 +113,14 @@ pin-depends: [
   [
     "findlib.1.8.1+dune"
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
+  ]
+  [
+    "lwt.5.4.2"
+    "https://github.com/ocsigen/lwt/archive/refs/tags/5.4.2.tar.gz"
+  ]
+  [
+    "mmap.1.1.0"
+    "https://github.com/mirage/mmap/releases/download/v1.1.0/mmap-v1.1.0.tbz"
   ]
   [
     "notty_async.v0.14.0"
@@ -121,6 +137,10 @@ pin-depends: [
   [
     "ocamlfind.1.8.1+dune"
     "https://github.com/dune-universe/lib-findlib/archive/v1.8.1+dune.tar.gz"
+  ]
+  [
+    "ocplib-endian.1.1"
+    "https://github.com/OCamlPro/ocplib-endian/archive/1.1.tar.gz"
   ]
   [
     "octavius.1.2.2"
@@ -193,6 +213,14 @@ pin-depends: [
   ]
 ]
 x-opam-monorepo-duniverse-dirs: [
+  [
+    "https://github.com/OCamlPro/ocplib-endian/archive/1.1.tar.gz"
+    "ocplib-endian"
+    [
+      "md5=dedf4d69c1b87b3c6c7234f632399285"
+      "sha512=39351c666d1394770696fa89ac62f7c137ad1697d99888bfba2cc8de2c61df05dd8b3aa327c117bf38f3e29e081026d2c575c5ad0022bde92b3d43aba577d3f9"
+    ]
+  ]
   [
     "https://github.com/c-cube/qcheck/archive/v0.18.tar.gz"
     "qcheck"
@@ -272,11 +300,24 @@ x-opam-monorepo-duniverse-dirs: [
     ["md5=1b82dec78849680b49ae9a8a365b831b"]
   ]
   [
+    "https://github.com/mirage/mmap/releases/download/v1.1.0/mmap-v1.1.0.tbz"
+    "mmap"
+    ["md5=8c5d5fbc537296dc525867535fb878ba"]
+  ]
+  [
     "https://github.com/mmottl/pcre-ocaml/releases/download/7.5.0/pcre-7.5.0.tbz"
     "pcre-ocaml"
     [
       "sha256=671142f40b6d86171cbc067253faadf903019161d57488bd0fb6c5456c2cbd1a"
       "sha512=be60f13ddb6bbfe20e30ca5d92434d85e1d1371479e1e2c725588af83fcc9366ed0435021b6a800c20336ac521f2134c767420136438684656a44ac1f9924be4"
+    ]
+  ]
+  [
+    "https://github.com/ocaml-community/cppo/archive/v1.6.8.tar.gz"
+    "cppo"
+    [
+      "md5=fed401197d86f9089e89f6cbdf1d660d"
+      "sha512=069bbe0ef09c03b0dc4b5795f909c3ef872fe99c6f1e6704a0fa97594b1570b3579226ec67fe11d696ccc349a4585055bbaf07c65eff423aa45af28abf38c858"
     ]
   ]
   [
@@ -335,6 +376,14 @@ x-opam-monorepo-duniverse-dirs: [
     [
       "sha256=babf72d3917b86f707885f0c5528e36c63fccb698f4b46cf2bab5c7ccdd6d84a"
       "sha512=1151d7edc8923516e9a36995a3f8938d323aaade759ad349ed15d6d8501db61ffbe63277e97c4d86149cf371306ac23df0f581ec7e02611f58335126e1870980"
+    ]
+  ]
+  [
+    "https://github.com/ocsigen/lwt/archive/refs/tags/5.4.2.tar.gz"
+    "lwt"
+    [
+      "md5=ba3659a8918d8e7cb0f4ef9a83945f90"
+      "sha512=9f46fb2e56dc7bd57a12d5ab4dc68719947a1462f336087a95e991d087bb9b5b8dee2592d0f7d35abc507d9a641dd221c44c949c81d00e26c673a067d94ba3f4"
     ]
   ]
   [
