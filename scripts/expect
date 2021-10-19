@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+git grep -e 'let%exp' -e 'let%test' -l "$1"
