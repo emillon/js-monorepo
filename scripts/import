@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+pkg=$1
+ver=$2
+full=$pkg.$ver
+
+opam source "$full"
+opam show --raw "$full" > "$full/$pkg.opam"
+git add "$full"
+opam monorepo lock --recurse-opam --ocaml-version 4.12.1
+opam monorepo pull

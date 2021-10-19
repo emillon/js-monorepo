@@ -1,0 +1,3 @@
+(library (name higher_kinded_tests) (libraries core_kernel higher_kinded)
+ (preprocess (pps ppx_jane))
+ (inline_tests))

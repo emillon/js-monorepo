@@ -1,0 +1,2 @@
+#!/usr/bin/env -S perl -n
+print if /^depends/../^]/ and /"v0/

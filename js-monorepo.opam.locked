@@ -386,6 +386,9 @@ x-opam-monorepo-duniverse-dirs: [
   ]
 ]
 x-opam-monorepo-root-packages: [
+  "accessor"
+  "accessor_base"
+  "accessor_core"
   "afl-persistent"
   "async"
   "async_kernel"
@@ -399,12 +402,14 @@ x-opam-monorepo-root-packages: [
   "bin_prot"
   "core"
   "core_bench"
+  "core_extended"
   "core_kernel"
   "expect_test_helpers_async"
   "expect_test_helpers_core"
   "fieldslib"
   "hardcaml"
   "hardcaml_waveterm"
+  "higher_kinded"
   "iobuf_test"
   "jane-street-headers"
   "js-monorepo"
@@ -416,6 +421,7 @@ x-opam-monorepo-root-packages: [
   "parsexp"
   "patdiff"
   "patience_diff"
+  "ppx_accessor"
   "ppx_assert"
   "ppx_base"
   "ppx_bench"
