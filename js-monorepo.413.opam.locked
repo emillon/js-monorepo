@@ -21,8 +21,8 @@ depends: [
   "mirage-no-xen" {= "1"}
   "mmap" {= "1.2.0"}
   "num" {= "1.3+dune"}
-  "ocaml" {= "4.12.1"}
-  "ocaml-base-compiler" {= "4.12.1"}
+  "ocaml" {= "4.13.1"}
+  "ocaml-base-compiler" {= "4.13.1"}
   "ocaml-config" {= "2"}
   "ocaml-migrate-parsetree" {= "2.3.0"}
   "ocaml-options-vanilla" {= "1"}

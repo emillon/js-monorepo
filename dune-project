@@ -16,4 +16,5 @@
   shell
   bignum
   pcre
-  lwt))
+  lwt)
+ (conflicts (dune (>= 3))))
