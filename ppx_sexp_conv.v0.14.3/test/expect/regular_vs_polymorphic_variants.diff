@@ -1,5 +1,5 @@
---- test_regular_variants.ml	2021-10-18 09:53:04.485971758 +0200
-+++ test_polymorphic_variants.ml	2021-10-18 09:53:04.469971649 +0200
+--- test_regular_variants.ml	2022-02-28 11:21:27.735782999 +0100
++++ test_polymorphic_variants.ml	2022-02-28 11:21:27.735782999 +0100
 @@ -4,8 +4,9 @@
  
  module Nullary = struct

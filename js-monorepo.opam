@@ -14,9 +14,6 @@ depends: [
   "lwt"
   "odoc" {with-doc}
 ]
-conflicts: [
-  "dune" {>= "3"}
-]
 build: [
   ["dune" "subst"] {dev}
   [
